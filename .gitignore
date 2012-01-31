@@ -1,0 +1,7 @@
+publish
+bin
+obj
+debug
+_ReSharper.Monitoring
+*.user
+*.suo
