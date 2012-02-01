@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9131D357-7849-48AB-986C-A80B7E2F6716}</ProjectGuid>
+    <ProjectGuid>{13C231F4-6DE4-4B77-9398-8A315C710D14}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CHAOS.Monitoring.Plugin.Example</RootNamespace>
-    <AssemblyName>CHAOS.Monitoring.Plugin.Example</AssemblyName>
+    <RootNamespace>CHAOS.Monitoring.Logging</RootNamespace>
+    <AssemblyName>CHAOS.Monitoring.Logging</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,18 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Example.cs" />
+    <Compile Include="UpdateLogg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CHAOS.Monitoring.Log\CHAOS.Monitoring.Log.csproj">
-      <Project>{EF9458D1-664D-4F4E-89C3-B2476EF514B1}</Project>
-      <Name>CHAOS.Monitoring.Log</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
-      <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
-      <Name>CHAOS.Monitoring.Plugin</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

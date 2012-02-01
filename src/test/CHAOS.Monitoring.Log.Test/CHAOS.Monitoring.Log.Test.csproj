@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9131D357-7849-48AB-986C-A80B7E2F6716}</ProjectGuid>
+    <ProjectGuid>{8EFEF74D-3AB7-44D5-B258-351F56FB7EF2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CHAOS.Monitoring.Plugin.Example</RootNamespace>
-    <AssemblyName>CHAOS.Monitoring.Plugin.Example</AssemblyName>
+    <RootNamespace>CHAOS.Monitoring.Log.Test</RootNamespace>
+    <AssemblyName>CHAOS.Monitoring.Log.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\tools\nunit\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,15 +43,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Example.cs" />
+    <Compile Include="LogTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CHAOS.Monitoring.Log\CHAOS.Monitoring.Log.csproj">
+    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Core\CHAOS.Monitoring.Core.csproj">
+      <Project>{89A06E27-EBCB-4DF7-B682-81CE49D44A63}</Project>
+      <Name>CHAOS.Monitoring.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Factory.Ping\CHAOS.Monitoring.Factory.Ping.csproj">
+      <Project>{AA513AEF-67D3-4172-B5DB-571DBB8F82C0}</Project>
+      <Name>CHAOS.Monitoring.Factory.Ping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Factory\CHAOS.Monitoring.Factory.csproj">
+      <Project>{D3AC6BAA-0DF0-4035-8DDC-DA37C5C43F4E}</Project>
+      <Name>CHAOS.Monitoring.Factory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Log\CHAOS.Monitoring.Log.csproj">
       <Project>{EF9458D1-664D-4F4E-89C3-B2476EF514B1}</Project>
       <Name>CHAOS.Monitoring.Log</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
+    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
       <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
       <Name>CHAOS.Monitoring.Plugin</Name>
     </ProjectReference>

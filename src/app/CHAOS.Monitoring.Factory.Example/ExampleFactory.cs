@@ -6,7 +6,7 @@ using CHAOS.Monitoring.Plugin;
 
 namespace CHAOS.Monitoring.Factory.Example
 {
-    public class ExampleFactory : IFactory
+    public class ExampleFactory: IFactory
     {
         public IPlugin InitilizePlugin( string parameters )
         {
