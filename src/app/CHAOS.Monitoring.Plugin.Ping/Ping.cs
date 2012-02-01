@@ -6,40 +6,33 @@ namespace CHAOS.Monitoring.Plugin.Ping
 {
     public class Ping : IPlugin
     {
-        private string _threshold;
-        public string Threshold
-        {
-            get;
-            set;
-        }
 
-        private int _interval;
-        public int Interval
-        {
-            get;
-            set;
-        }
+    public Ping(string parameters)
+    {
+        host = parameters;
+    }
 
-        public long PingHost(string host)
+        private string host;
+        public string Run( )
         {
-            System.Net.NetworkInformation.Ping pingSender = new System.Net.NetworkInformation.Ping();
-            PingOptions options = new PingOptions();
+            System.Net.NetworkInformation.Ping pingSender = new System.Net.NetworkInformation.Ping( );
+            PingOptions options = new PingOptions( );
 
             // Use the default Ttl value which is 128,
             // but change the fragmentation behavior.
             options.DontFragment = true;
 
             // Create a buffer of 32 bytes of data to be transmitted.
-            string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            byte[] buffer = Encoding.ASCII.GetBytes(data);
-            int timeout = 2500;
+            const string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            byte[ ] buffer = Encoding.ASCII.GetBytes( data );
+            const int timeout = 500;
 
-            PingReply reply = pingSender.Send(host, timeout, buffer, options);
-            
-            if (reply.Status == IPStatus.TimedOut)
-                throw new TimeoutException();
+            PingReply reply = pingSender.Send( host, timeout, buffer, options );
 
-            return (reply.RoundtripTime);
+            if ( reply.Status == IPStatus.TimedOut )
+                throw new TimeoutException( );
+
+            return ( Convert.ToString( reply.RoundtripTime ));
         }
     }
 }

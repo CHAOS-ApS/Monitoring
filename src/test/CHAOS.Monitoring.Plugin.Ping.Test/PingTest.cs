@@ -11,26 +11,26 @@ namespace CHAOS.Monitoring.Plugin.Ping.Test
     public class PingTest : TestBase
     {
         [Test]
-        public void Should_Create_Instance_Of_Ping()
+        public void Should_Create_Instance_Of_Ping( )
         {
-            Ping ping = new Ping();
+            Ping ping = new Ping( "127.0.0.1" );
 
-            Assert.GreaterOrEqual(0,ping.PingHost("127.0.0.1"));
+            Assert.GreaterOrEqual( 0, Convert.ToInt64( ping.Run( ) ) );
         }
 
-        [Test, ExpectedException(typeof(TimeoutException))]
-        public void Should_Throw_TimeoutException_If_IP_Is_Unreachable()
+        [Test, ExpectedException( typeof( TimeoutException ) )]
+        public void Should_Throw_TimeoutException_If_IP_Is_Unreachable( )
         {
-            Ping ping = new Ping();
-            ping.PingHost("134.0.0.21");
+            Ping ping = new Ping( "137.0.0.0" );
+            ping.Run( );
         }
 
         [Test]
-        public void Should_Return_PingTime_From_Pinging_Real_Site()
+        public void Should_Return_PingTime_From_Pinging_Real_Site( )
         {
-            Ping ping = new Ping();
+            Ping ping = new Ping( "www.geckon.com" );
 
-            Assert.Greater(ping.PingHost("www.geckon.com"), 0);
+            Assert.Greater( Convert.ToInt64( ping.Run( )), 0  );
         }
     }
 }
