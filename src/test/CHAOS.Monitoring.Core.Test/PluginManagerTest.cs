@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
+﻿using System.Threading;
 using NUnit.Framework;
 
 namespace CHAOS.Monitoring.Core.Test
@@ -11,21 +7,36 @@ namespace CHAOS.Monitoring.Core.Test
     public class PluginManagerTest
     {
         [Test]
-        public void Should_Initilize_A_Plugin( )
+        public void Should_Create_A_Plugin( )
         {
             PluginManager pluginManager = new PluginManager( );
 
-            pluginManager.LoadPlugin("127.0.0.1" );
+            pluginManager.LoadPlugin( "Ping","127.0.0.1" );
         }
 
         [Test]
-        public void Should_Run_All_Plugins( )
+        public void Should_Create_A_Plugin_And_Run_All_Plugins( )
         {
             PluginManager pluginManager = new PluginManager( );
 
-            pluginManager.LoadPlugin("127.0.0.1" );
+            pluginManager.LoadPlugin( "Ping","127.0.0.1" );
 
             pluginManager.RunAllPlugins( );
+        }
+
+        [Test]
+        public void Should_Create_A_Plugin_And__Run_All_Plugins_With_Fixed_Interval( )
+        {
+            using ( PluginManager pluginManager = new PluginManager( ) )
+            {
+                pluginManager.LoadPlugin( "Pingj","www.flashback.org" );
+
+                pluginManager.RunAllPlugins( 5, 500 );
+
+                Thread.Sleep( 2500 );
+
+                pluginManager.Dispose( );
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using CHAOS.Monitoring.Plugin;
 
@@ -15,10 +14,9 @@ namespace CHAOS.Monitoring.Core
             return _plugins;
         }
 
-
-        public void LoadPlugin( string parameters )
+        public void LoadPlugin( string pluginType , string parameters )
         {
-            _plugins.Add( Factory.Factory.CreatePlugin( parameters ) );
+            _plugins.Add( Factory.PluginFactory.CreatePlugin( pluginType, parameters ) );
         }
 
         /// <summary>
@@ -54,11 +52,10 @@ namespace CHAOS.Monitoring.Core
         /// <param name="interval">The interval in Milliseconds between each run of all plugins </param>
         public void RunAllPlugins( int timesToRun, int interval )
         {
-            runTimer = new Timer( IntervalTimerElapsed, timesToRun, 0, 500 );
+            runTimer = new Timer( IntervalTimerEventHandler, timesToRun, 0, 500 );
         }
 
-
-        private void IntervalTimerElapsed( object state )
+        private void IntervalTimerEventHandler( object state )
         {
             int enemiesOf = ( int ) state;
 

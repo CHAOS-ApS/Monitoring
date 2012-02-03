@@ -11,7 +11,7 @@ namespace CHAOS.Monitoring.Plugin.Ping.Test
     public class PingTest : TestBase
     {
         [Test]
-        public void Should_Create_Instance_Of_Ping( )
+        public void Should_Ping_An_IP( )
         {
             Ping ping = new Ping( "127.0.0.1" );
 
@@ -26,7 +26,7 @@ namespace CHAOS.Monitoring.Plugin.Ping.Test
         }
 
         [Test]
-        public void Should_Return_PingTime_From_Pinging_Real_Site( )
+        public void Should_Return_PingTime_From_Pinging_IP( )
         {
             Ping ping = new Ping( "www.geckon.com" );
 
