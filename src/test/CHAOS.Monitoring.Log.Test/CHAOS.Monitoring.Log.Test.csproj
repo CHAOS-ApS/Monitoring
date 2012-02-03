@@ -51,10 +51,6 @@
       <Project>{89A06E27-EBCB-4DF7-B682-81CE49D44A63}</Project>
       <Name>CHAOS.Monitoring.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Factory.Ping\CHAOS.Monitoring.Factory.Ping.csproj">
-      <Project>{AA513AEF-67D3-4172-B5DB-571DBB8F82C0}</Project>
-      <Name>CHAOS.Monitoring.Factory.Ping</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\app\CHAOS.Monitoring.Factory\CHAOS.Monitoring.Factory.csproj">
       <Project>{D3AC6BAA-0DF0-4035-8DDC-DA37C5C43F4E}</Project>
       <Name>CHAOS.Monitoring.Factory</Name>

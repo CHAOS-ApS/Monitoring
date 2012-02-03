@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Net.NetworkInformation;
 
@@ -27,7 +26,7 @@ namespace CHAOS.Monitoring.Plugin.Ping
             // Create a buffer of 32 bytes of data to be transmitted.
             const string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             byte[ ] buffer = Encoding.ASCII.GetBytes( data );
-            const int timeout = 2500;
+            const int timeout = 10000;
 
             PingReply reply = pingSender.Send( _host, timeout, buffer );
 

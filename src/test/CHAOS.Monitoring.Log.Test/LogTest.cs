@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using CHAOS.Monitoring.Core;
-using CHAOS.Monitoring.Factory.Ping;
 using CHAOS.Monitoring.Plugin;
 using NUnit.Framework;
 
@@ -15,16 +12,29 @@ namespace CHAOS.Monitoring.Log.Test
         [Test]
         public void Should_Update_Plugins_Log_And_Then_Read_It()
         {
-            PluginManager pluginManager = new PluginManager( );
-
-            pluginManager.LoadPlugin( new PingFactory( ), "www.geckon.com" );
-
-            pluginManager.RunAllPlugins( );
-
-            foreach (IPlugin plugin in pluginManager.GetPluginList())
+            using( PluginManager pluginManager = new PluginManager( ) )
             {
-                Console.WriteLine(plugin.GetLog().GetLog().First());
+                pluginManager.LoadPlugin( "www.flashback.org" );
+
+                pluginManager.RunAllPlugins( 5, 500 );
+
+                Thread.Sleep( 2500 );
+
+                foreach ( String message in pluginManager.GetPluginManagerLog( ).GetLog( ) )
+                    Console.WriteLine( message );
+
+                foreach ( IPlugin plugin in pluginManager.GetPluginList( ) )
+                {
+                    foreach ( String message in plugin.GetLog( ).GetLog( ) )
+                    {
+                        Console.WriteLine( message );
+                    }
+                }
+
+                pluginManager.Dispose();
             }
+
+            
         }
     }
 }

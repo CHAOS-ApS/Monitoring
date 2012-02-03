@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CHAOS.Monitoring.Plugin.Example
 {
@@ -18,5 +15,10 @@ namespace CHAOS.Monitoring.Plugin.Example
         }
 
         private Log.Log _log = new Log.Log( );
+
+        public Log.Log GetLog( )
+        {
+            return _log;
+        }
     }
 }
