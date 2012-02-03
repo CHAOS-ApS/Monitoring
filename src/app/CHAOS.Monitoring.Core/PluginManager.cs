@@ -9,22 +9,16 @@ namespace CHAOS.Monitoring.Core
     public class PluginManager : IDisposable
     {
         private List<IPlugin> _plugins = new List<IPlugin>( );
-        private Log.Log _log = new Log.Log( );
-
+      
         public List<IPlugin> GetPluginList( )
         {
             return _plugins;
         }
 
-        public Log.Log GetPluginManagerLog( )
-        {
-            return _log;
-        }
 
         public void LoadPlugin( string parameters )
         {
             _plugins.Add( Factory.Factory.CreatePlugin( parameters ) );
-            _log.UpdateLog( String.Format( "The following plugin was loaded: {0}", _plugins.Last( ) ) );
         }
 
         /// <summary>
@@ -34,7 +28,6 @@ namespace CHAOS.Monitoring.Core
         {
             foreach ( IPlugin plugin in _plugins )
             {
-                _log.UpdateLog( "Started running all plugins" );
                 plugin.Run( );
             }
         }
@@ -45,7 +38,6 @@ namespace CHAOS.Monitoring.Core
         /// <param name="runTimes">Amount of times to run plugins</param>
         public void RunAllPlugins( int runTimes )
         {
-            _log.UpdateLog( String.Format( "Started running all plugins {0} times", runTimes ) );
             foreach ( IPlugin plugin in _plugins )
             {
                 for ( int i = 0; i < runTimes; i++ )
@@ -63,8 +55,6 @@ namespace CHAOS.Monitoring.Core
         public void RunAllPlugins( int timesToRun, int interval )
         {
             runTimer = new Timer( IntervalTimerElapsed, timesToRun, 0, 500 );
-        
-            _log.UpdateLog( String.Format( "Started running all plugins {0} times with the interval of {1} MS", timesToRun, interval ) );
         }
 
 

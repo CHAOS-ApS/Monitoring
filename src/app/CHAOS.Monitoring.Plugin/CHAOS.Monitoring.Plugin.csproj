@@ -43,12 +43,6 @@
     <Compile Include="IPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CHAOS.Monitoring.Log\CHAOS.Monitoring.Log.csproj">
-      <Project>{EF9458D1-664D-4F4E-89C3-B2476EF514B1}</Project>
-      <Name>CHAOS.Monitoring.Log</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

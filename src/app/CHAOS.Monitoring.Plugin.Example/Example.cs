@@ -13,12 +13,5 @@ namespace CHAOS.Monitoring.Plugin.Example
         {
             return ( "" );
         }
-
-        private Log.Log _log = new Log.Log( );
-
-        public Log.Log GetLog( )
-        {
-            return _log;
-        }
     }
 }

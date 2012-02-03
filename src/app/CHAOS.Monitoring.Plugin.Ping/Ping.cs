@@ -11,12 +11,6 @@ namespace CHAOS.Monitoring.Plugin.Ping
             _host = host;
         }
 
-        public Log.Log GetLog()
-        {
-            return _log;
-        }
-
-        private Log.Log _log = new Log.Log( );
         private readonly string _host;
 
         public string Run( )
@@ -33,8 +27,6 @@ namespace CHAOS.Monitoring.Plugin.Ping
             if ( reply.Status == IPStatus.TimedOut )
                 throw new TimeoutException( );
 
-            _log.UpdateLog( String.Format( "{0} was pinged and it took {1} MS", _host, reply.RoundtripTime ) );
-            
             return ( Convert.ToString( reply.RoundtripTime ) );
         }
     }

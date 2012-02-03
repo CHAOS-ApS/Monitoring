@@ -44,10 +44,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CHAOS.Monitoring.Log\CHAOS.Monitoring.Log.csproj">
-      <Project>{EF9458D1-664D-4F4E-89C3-B2476EF514B1}</Project>
-      <Name>CHAOS.Monitoring.Log</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
       <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
       <Name>CHAOS.Monitoring.Plugin</Name>
