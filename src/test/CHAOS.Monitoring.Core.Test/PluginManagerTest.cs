@@ -20,8 +20,6 @@ namespace CHAOS.Monitoring.Core.Test
             PluginManager pluginManager = new PluginManager( );
 
             pluginManager.LoadPlugin( "Ping","127.0.0.1" );
-
-            pluginManager.RunAllPlugins( );
         }
 
         [Test]
@@ -29,13 +27,11 @@ namespace CHAOS.Monitoring.Core.Test
         {
             using ( PluginManager pluginManager = new PluginManager( ) )
             {
-                pluginManager.LoadPlugin( "Pingj","www.flashback.org" );
+                pluginManager.LoadPlugin( "Ping","www.flashback.org" );
 
-                pluginManager.RunAllPlugins( 5, 500 );
+                pluginManager.RunAllPlugins( 5, 500, false );
 
                 Thread.Sleep( 2500 );
-
-                pluginManager.Dispose( );
             }
         }
     }
