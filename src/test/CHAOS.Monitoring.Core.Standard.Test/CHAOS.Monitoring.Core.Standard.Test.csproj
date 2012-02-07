@@ -47,6 +47,10 @@
     <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Core\CHAOS.Monitoring.Core.csproj">
+      <Project>{89A06E27-EBCB-4DF7-B682-81CE49D44A63}</Project>
+      <Name>CHAOS.Monitoring.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\app\CHAOS.Monitoring.Plugin.Ping\CHAOS.Monitoring.Plugin.Ping.csproj">
       <Project>{66565654-CDB3-4F7D-995D-13FC3457899E}</Project>
       <Name>CHAOS.Monitoring.Plugin.Ping</Name>

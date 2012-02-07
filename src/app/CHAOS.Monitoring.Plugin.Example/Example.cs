@@ -11,7 +11,7 @@ namespace CHAOS.Monitoring.Plugin.Example
 
         public string Run( )
         {
-            return ( "" );
+            return ( "hey... i am a method" );
         }
     }
 }

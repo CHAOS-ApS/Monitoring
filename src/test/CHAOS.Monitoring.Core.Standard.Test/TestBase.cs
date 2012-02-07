@@ -8,10 +8,20 @@ namespace CHAOS.Monitoring.Core.Standard.Test
     {
         public Ping Ping { get; set; }
 
+        protected TriggerManager TriggerManager { get; set; }
+
         [SetUp]
-        public void SetUp()
+        public void SetUp( )
         {
             Ping = new Ping( "127.0.0.1" );
+
+            //starts the trigger manager which controlls my triggers
+            TriggerManager = new TriggerManager( );
+
+            //create 3 default triggers
+            TriggerManager.CreateTrigger( "500" );
+            TriggerManager.CreateTrigger( "1000" );
+            TriggerManager.CreateTrigger( "2000" );
         }
     }
 }

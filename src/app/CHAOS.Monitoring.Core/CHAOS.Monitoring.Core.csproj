@@ -40,17 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PluginManager.cs" />
+    <Compile Include="TriggerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CHAOS.Monitoring.Factory\CHAOS.Monitoring.Factory.csproj">
-      <Project>{D3AC6BAA-0DF0-4035-8DDC-DA37C5C43F4E}</Project>
-      <Name>CHAOS.Monitoring.Factory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
-      <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
-      <Name>CHAOS.Monitoring.Plugin</Name>
+    <ProjectReference Include="..\CHAOS.Monitoring.Trigger\CHAOS.Monitoring.Trigger.csproj">
+      <Project>{2A07F5C2-20EA-415A-BA90-2DBFAB7D82C7}</Project>
+      <Name>CHAOS.Monitoring.Trigger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
