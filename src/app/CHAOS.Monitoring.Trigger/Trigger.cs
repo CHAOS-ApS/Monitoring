@@ -5,30 +5,51 @@ using CHAOS.Monitoring.Plugin;
 
 namespace CHAOS.Monitoring.Trigger
 {
+    public delegate void TriggerActivatedEventHandler( object sender );
+
     public class Trigger
     {
-        public event TriggerActivatedEventHandler TriggerActivated;
+        private event TriggerActivatedEventHandler TriggerActivatedEvent = delegate { };
+
+        private void OnTriggerActivatedEvent( object sender )
+        {
+            if ( _isTriggerActive )
+            {
+                TriggerActivatedEvent(sender);
+                _sender = sender;
+            }
+        }
+
+        private void SomeLogMethod( object sender )
+        {
+            Console.WriteLine( "SomeLogMethod" );
+        }
+
+        private void SomeOtherMethod( object sender )
+        {
+            Console.WriteLine( "SomeDataSyncMethod" );
+        }
 
         public Trigger( string interval, bool status )
         {
-            _runTimer = new Timer( TriggerActivated(), null, 0, Convert.ToInt32( interval ) );
-            _isActive = status;
+            TriggerActivatedEvent += SomeLogMethod;
+            TriggerActivatedEvent += SomeOtherMethod;
+            _runTimer = new Timer( OnTriggerActivatedEvent, this, 0, Convert.ToInt32( interval ) );
+            _isTriggerActive = status;
         }
 
-        private bool _isActive;
+        private object _sender;
+        public object Sender { get { return _sender; } }
+
         private Timer _runTimer;
+        private bool _isTriggerActive;
         private List<IPlugin> _plugins = new List<IPlugin>( );
-   
+
         public IPlugin GetPlugin( int index )
         {
             return _plugins[ index ];
         }
 
-        private void TriggerActivatedEventHandler( object parameter )
-        {
-            if ( _isActive )
-                RunAllPlugins( );
-        }
 
         /// <summary>
         /// Adds a plugin to being activated by this trigger
@@ -53,14 +74,14 @@ namespace CHAOS.Monitoring.Trigger
 
         public void StartTrigger( )
         {
-            _isActive = true;
+            _isTriggerActive = true;
         }
 
         public void StopTrigger( )
         {
-            _isActive = false;
+            _isTriggerActive = false;
         }
     }
 
-    public delegate void TriggerActivatedEventHandler(object sender, TriggerActivatedEventHandlerArgs args);
+
 }

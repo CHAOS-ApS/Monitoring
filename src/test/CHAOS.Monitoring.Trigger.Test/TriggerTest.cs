@@ -11,12 +11,13 @@ namespace CHAOS.Monitoring.Trigger.Test
     public class TriggerTest
     {
         [Test]
-        public void Should_Run_Trigger_Endlessly( )
+        public void Should_Run_Trigger_And_Update_Trigger_Sender( )
         {
-            Trigger test = new Trigger( "2000" );
+            Trigger test = new Trigger( "2000", true );
             test.AddPlugin( "Ping", "www.google.se" );
-
-            Thread.Sleep( 11000 );
+            Thread.Sleep( 5000 );
+            Assert.NotNull( test.Sender );
         }
     }
+
 }
