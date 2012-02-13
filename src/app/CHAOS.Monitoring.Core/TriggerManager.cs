@@ -15,30 +15,19 @@ namespace CHAOS.Monitoring.Core
         /// <summary>
         /// Used to create a trigger
         /// </summary>
-        /// <param name="parameters">Parameters for the trigger</param>
-        /// <param name="isActiveOnStartup">True if the trigger is going to be ran instantly </param>
-        public void CreateTrigger( string parameters, bool isActiveOnStartup )
+        public void CreateTrigger( )
         {
-            _triggers.Add( new Trigger.Trigger( parameters, isActiveOnStartup ) );
+            _triggers.Add( new Trigger.Trigger( ) );
         }
 
-        /// <summary>
-        /// Used to delete a trigger
-        /// </summary>
-        /// <param name="index">Idenfies the trigger by it's position</param>
+        public void InitilizeTrigger(int index, string parameters)
+        {
+            _triggers[index].InitilizeTrigger(parameters);
+        }
+
         public void RemoveTrigger( int index )
         {
             _triggers.RemoveAt( index );
-        }
-
-        public void StartTrigger( int index )
-        {
-            _triggers[ index ].StartTrigger( );
-        }
-
-        public void StopTrigger( int index )
-        {
-            _triggers[ index ].StopTrigger( ); ;
         }
     }
 }

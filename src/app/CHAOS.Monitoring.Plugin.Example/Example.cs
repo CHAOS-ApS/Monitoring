@@ -4,14 +4,18 @@ namespace CHAOS.Monitoring.Plugin.Example
 {
     public class Example : IPlugin
     {
-        public Example(String parameters)
+        public Example( String parameters )
         {
-
+             _parameters = parameters;
         }
 
-        public string Run( )
+        private readonly string _parameters;
+
+        public IPluginResult Run( )
         {
-            return ( "hey... i am a method" );
+            ExampleResult result = new ExampleResult( );
+            result.Result = _parameters;
+            return ( result );
         }
     }
 }

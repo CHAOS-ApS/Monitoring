@@ -19,9 +19,8 @@ namespace CHAOS.Monitoring.Core.Standard.Test
             TriggerManager = new TriggerManager( );
 
             //create 3 default triggers
-            TriggerManager.CreateTrigger( "500", true );
-            TriggerManager.CreateTrigger( "1000", true );
-            TriggerManager.CreateTrigger( "2000", true );
+            TriggerManager.CreateTrigger( );
+            TriggerManager.CreateTrigger( );
         }
     }
 }

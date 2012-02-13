@@ -5,51 +5,19 @@ using CHAOS.Monitoring.Plugin;
 
 namespace CHAOS.Monitoring.Trigger
 {
-    public delegate void TriggerActivatedEventHandler( object sender );
+    public delegate void TriggerActivatedEventHandler( object sender, PluginResultsArgs args );
 
     public class Trigger
     {
-        private event TriggerActivatedEventHandler TriggerActivatedEvent = delegate { };
-
-        private void OnTriggerActivatedEvent( object sender )
-        {
-            if ( _isTriggerActive )
-            {
-                TriggerActivatedEvent(sender);
-                _sender = sender;
-            }
-        }
-
-        private void SomeLogMethod( object sender )
-        {
-            Console.WriteLine( "SomeLogMethod" );
-        }
-
-        private void SomeOtherMethod( object sender )
-        {
-            Console.WriteLine( "SomeDataSyncMethod" );
-        }
-
-        public Trigger( string interval, bool status )
-        {
-            TriggerActivatedEvent += SomeLogMethod;
-            TriggerActivatedEvent += SomeOtherMethod;
-            _runTimer = new Timer( OnTriggerActivatedEvent, this, 0, Convert.ToInt32( interval ) );
-            _isTriggerActive = status;
-        }
-
-        private object _sender;
-        public object Sender { get { return _sender; } }
+        public event TriggerActivatedEventHandler TriggerActivatedEvent = delegate { };
 
         private Timer _runTimer;
-        private bool _isTriggerActive;
         private List<IPlugin> _plugins = new List<IPlugin>( );
 
         public IPlugin GetPlugin( int index )
         {
             return _plugins[ index ];
         }
-
 
         /// <summary>
         /// Adds a plugin to being activated by this trigger
@@ -62,26 +30,24 @@ namespace CHAOS.Monitoring.Trigger
         }
 
         /// <summary>
-        /// Run all plugins once
+        /// Run all plugins that has been added to the plugin list
         /// </summary>
-        public void RunAllPlugins( )
+        /// <param name="sender"></param>
+        public void RunPlugins( object sender )
         {
+            PluginResultsArgs resultsArgs = new PluginResultsArgs( );
+
             foreach ( IPlugin plugin in _plugins )
             {
-                plugin.Run( );
+                resultsArgs.SaveResult( plugin.Run( ) );
             }
+
+            TriggerActivatedEvent( this, resultsArgs );
         }
 
-        public void StartTrigger( )
+        public void InitilizeTrigger( string interval )
         {
-            _isTriggerActive = true;
-        }
-
-        public void StopTrigger( )
-        {
-            _isTriggerActive = false;
+            _runTimer = new Timer( RunPlugins, this, 0, Convert.ToInt32( interval ) );
         }
     }
-
-
 }

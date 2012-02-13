@@ -6,6 +6,10 @@ namespace CHAOS.Monitoring.Plugin.Ping
 {
     public class Ping : IPlugin
     {
+        /// <summary>
+        /// Initilizes the plugin with the host it shall ping
+        /// </summary>
+        /// <param name="host">The host that shall be pinged</param>
         public Ping( string host )
         {
             _host = host;
@@ -13,8 +17,9 @@ namespace CHAOS.Monitoring.Plugin.Ping
 
         private readonly string _host;
 
-        public string Run( )
+        public IPluginResult Run( )
         {
+            PingResult result = new PingResult();
             System.Net.NetworkInformation.Ping pingSender = new System.Net.NetworkInformation.Ping( );
 
             // Create a buffer of 32 bytes of data to be transmitted.
@@ -27,7 +32,8 @@ namespace CHAOS.Monitoring.Plugin.Ping
             if ( reply.Status == IPStatus.TimedOut )
                 throw new TimeoutException( );
 
-            return ( Convert.ToString( reply.RoundtripTime ) );
+            result.Result = reply.RoundtripTime;
+            return (result);
         }
     }
 }

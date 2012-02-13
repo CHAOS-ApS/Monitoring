@@ -6,6 +6,13 @@ namespace CHAOS.Monitoring.Factory
 {
     public static class PluginFactory
     {
+        ///TODO: Make dynamic!
+        /// <summary>
+        /// Creates a plugin
+        /// </summary>
+        /// <param name="pluginType">Specifies the plugin type</param>
+        /// <param name="parameters">Parameters for the plugin</param>
+        /// <returns>Returns  the new plugin</returns>
         public static Plugin.IPlugin CreatePlugin(string pluginType, string parameters)
         {
             switch(pluginType)

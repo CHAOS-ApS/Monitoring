@@ -2,6 +2,6 @@
 {
     public interface IPlugin
     {
-        string Run( );
+        IPluginResult Run( );
     }
 }
