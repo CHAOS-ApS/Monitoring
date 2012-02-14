@@ -20,7 +20,7 @@ namespace CHAOS.Monitoring.Trigger.Test
         [Test]
         public void Should_Test_Trigger_Interval_And_That_Trigger_Event_Is_Runned( )
         {
-            Trigger test = new Trigger();
+            ITrigger test = new TimeTrigger.TimeTrigger(DateTime.Now.AddSeconds( 1 ) );
 
             test.AddPlugin("Example","Example: Run Method");
 
@@ -31,7 +31,6 @@ namespace CHAOS.Monitoring.Trigger.Test
                                                       Assert.AreEqual("Example: Run Method",result.ToString());
                                                   }
                                               };
-            test.InitilizeTrigger("10");
             Thread.Sleep( 1000 );
         }
 
@@ -39,7 +38,7 @@ namespace CHAOS.Monitoring.Trigger.Test
         [Test]
         public void Should_Test_Trigger_Activated_At_Specific_Time_And_That_Trigger_Event_Is_Runned( )
         {
-            Trigger test = new Trigger( );
+            ITrigger test = new TimeTrigger.TimeTrigger( DateTime.Now.AddSeconds( 1 ) );
 
             test.AddPlugin( "Example", "Example: Run Method" );
 
@@ -50,7 +49,6 @@ namespace CHAOS.Monitoring.Trigger.Test
                     Assert.AreEqual( "Example: Run Method", result.ToString( ) );
                 }
             };
-            test.InitilizeTrigger( DateTime.Now.AddSeconds(1) );
             Thread.Sleep( 5000 );
         }
     }

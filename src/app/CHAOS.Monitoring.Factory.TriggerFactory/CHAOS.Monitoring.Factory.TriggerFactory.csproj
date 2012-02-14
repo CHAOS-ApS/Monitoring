@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D665F7F1-F0D3-42AE-9C88-44165A99969C}</ProjectGuid>
+    <ProjectGuid>{75BB83B2-F2DA-476D-ACBC-B170CCD2DEA7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CHAOS.Monitoring.Trigger.Test</RootNamespace>
-    <AssemblyName>CHAOS.Monitoring.Trigger.Test</AssemblyName>
+    <RootNamespace>CHAOS.Monitoring.Factory.TriggerFactory</RootNamespace>
+    <AssemblyName>CHAOS.Monitoring.Factory.TriggerFactory</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\tools\nunit\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,19 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TriggerTest.cs" />
+    <Compile Include="TriggerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
-      <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
-      <Name>CHAOS.Monitoring.Plugin</Name>
+    <ProjectReference Include="..\CHAOS.Monitoring.Trigger.DailyTrigger\CHAOS.Monitoring.Trigger.DailyTrigger.csproj">
+      <Project>{20B3E73C-9C4C-4669-832B-C37663452C2D}</Project>
+      <Name>CHAOS.Monitoring.Trigger.DailyTrigger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Trigger.TimeTrigger\CHAOS.Monitoring.Trigger.TimeTrigger.csproj">
+    <ProjectReference Include="..\CHAOS.Monitoring.Trigger.TimeTrigger\CHAOS.Monitoring.Trigger.TimeTrigger.csproj">
       <Project>{3EACBE93-1AA6-46AA-A6F8-364BDAD8CBF8}</Project>
       <Name>CHAOS.Monitoring.Trigger.TimeTrigger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Trigger\CHAOS.Monitoring.Trigger.csproj">
+    <ProjectReference Include="..\CHAOS.Monitoring.Trigger\CHAOS.Monitoring.Trigger.csproj">
       <Project>{2A07F5C2-20EA-415A-BA90-2DBFAB7D82C7}</Project>
       <Name>CHAOS.Monitoring.Trigger</Name>
     </ProjectReference>

@@ -1,41 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
+using CHAOS.Monitoring.Factory.PluginFactory;
 using CHAOS.Monitoring.Plugin;
 
 namespace CHAOS.Monitoring.Trigger
 {
-    public abstract class Trigger
+    public abstract class Trigger: ITrigger
     {
         public event TriggerActivatedEventHandler TriggerActivatedEvent = delegate { };
 
-        protected Timer _runTimer;
-        protected List<IPlugin> _plugins = new List<IPlugin>( );
+        protected Timer RunTimer;
+        protected List<IPlugin> Plugins = new List<IPlugin>( );
 
         public IPlugin GetPlugin( int index )
         {
-            return _plugins[ index ];
+            return Plugins[ index ];
         }
 
-        /// <summary>
-        /// Adds a plugin to being activated by this trigger
-        /// </summary>
-        /// <param name="pluginType">Which type of plugin</param>
-        /// <param name="parameters">The parameters for the plugin</param>
         public void AddPlugin( string pluginType, string parameters )
         {
-            _plugins.Add( Factory.PluginFactory.CreatePlugin( pluginType, parameters ) );
+            Plugins.Add( PluginFactory.CreatePlugin( pluginType, parameters ) );
         }
 
-        /// <summary>
-        /// Run all plugins that has been added to the plugin list
-        /// </summary>
-        /// <param name="sender"></param>
         protected void RunPlugins( object sender )
         {
             PluginResultsArgs resultsArgs = new PluginResultsArgs( );
 
-            foreach ( IPlugin plugin in _plugins )
+            foreach ( IPlugin plugin in Plugins )
             {
                 resultsArgs.SaveResult( plugin.Run( ) );
             }

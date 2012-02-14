@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using CHAOS.Monitoring.Trigger.TimeTrigger;
 
 namespace CHAOS.Monitoring.Core
 {
     public class TriggerManager
     {
-        private List<Trigger.Trigger> _triggers = new List<Trigger.Trigger>( );
+        private List<Trigger.ITrigger> _triggers = new List<Trigger.ITrigger>( );
 
-        public Trigger.Trigger GetTrigger( int index )
+        public Trigger.ITrigger GetTrigger( int index )
         {
             return _triggers[ index ];
         }
@@ -15,14 +16,9 @@ namespace CHAOS.Monitoring.Core
         /// <summary>
         /// Used to create a trigger
         /// </summary>
-        public void CreateTrigger( )
+        public void CreateTrigger( DateTime dateTime )
         {
-            _triggers.Add( new Trigger.Trigger( ) );
-        }
-
-        public void InitilizeTrigger(int index, string parameters)
-        {
-            _triggers[index].InitilizeTrigger(parameters);
+            _triggers.Add( new TimeTrigger( dateTime ) );
         }
 
         public void RemoveTrigger( int index )

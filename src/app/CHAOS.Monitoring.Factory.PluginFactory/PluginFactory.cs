@@ -2,7 +2,7 @@
 using CHAOS.Monitoring.Plugin.Example;
 using CHAOS.Monitoring.Plugin.Ping;
 
-namespace CHAOS.Monitoring.Factory
+namespace CHAOS.Monitoring.Factory.PluginFactory
 {
     public static class PluginFactory
     {
@@ -13,16 +13,16 @@ namespace CHAOS.Monitoring.Factory
         /// <param name="pluginType">Specifies the plugin type</param>
         /// <param name="parameters">Parameters for the plugin</param>
         /// <returns>Returns  the new plugin</returns>
-        public static Plugin.IPlugin CreatePlugin(string pluginType, string parameters)
+        public static Plugin.IPlugin CreatePlugin( string pluginType, string parameters )
         {
-            switch(pluginType)
+            switch ( pluginType )
             {
                 case "Ping":
-                    return new Ping(parameters);
+                    return new Ping( parameters );
                 case "Example":
-                    return new Example(parameters);
+                    return new Example( parameters );
             }
-            throw new NotImplementedException(string.Format("The plugin type: {0} does not exsist", pluginType));
+            throw new NotImplementedException( string.Format( "The plugin type: {0} does not exsist", pluginType ) );
         }
     }
 }

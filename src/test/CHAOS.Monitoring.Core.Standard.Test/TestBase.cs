@@ -1,4 +1,5 @@
-﻿using CHAOS.Monitoring.Plugin.Ping;
+﻿using System;
+using CHAOS.Monitoring.Plugin.Ping;
 using NUnit.Framework;
 
 namespace CHAOS.Monitoring.Core.Standard.Test
@@ -19,8 +20,8 @@ namespace CHAOS.Monitoring.Core.Standard.Test
             TriggerManager = new TriggerManager( );
 
             //create 3 default triggers
-            TriggerManager.CreateTrigger( );
-            TriggerManager.CreateTrigger( );
+            TriggerManager.CreateTrigger( DateTime.Now );
+            TriggerManager.CreateTrigger( DateTime.Now );
         }
     }
 }

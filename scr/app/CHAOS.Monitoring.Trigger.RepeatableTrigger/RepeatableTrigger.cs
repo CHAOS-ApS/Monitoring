@@ -8,9 +8,8 @@ using CHAOS.Monitoring.Plugin;
 
 namespace CHAOS.Monitoring.Trigger.RepeatableTrigger
 {
-    public delegate void TriggerActivatedEventHandler( object sender, PluginResultsArgs args );
-
-    public class RepeatableTrigger: Trigger
+   
+    public class RepeatableTrigger: ITrigger
     {
         public event TriggerActivatedEventHandler TriggerActivatedEvent = delegate { };
 
