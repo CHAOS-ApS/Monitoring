@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using CHAOS.Monitoring.Plugin;
 using NUnit.Framework;
@@ -19,13 +18,13 @@ namespace CHAOS.Monitoring.Trigger.Test
         //}
 
         [Test]
-        public void Should_Run_Trigger_And_Create_And_Run_Example_Plugin( )
+        public void Should_Test_Trigger_Interval_And_That_Trigger_Event_Is_Runned( )
         {
             Trigger test = new Trigger();
 
             test.AddPlugin("Example","Example: Run Method");
 
-            test.TriggerActivatedEvent += (object sender, PluginResultsArgs args) =>
+            test.TriggerActivatedEvent += (sender, args) =>
                                               {
                                                   foreach (IPluginResult result in args.GetResults())
                                                   {
@@ -34,6 +33,25 @@ namespace CHAOS.Monitoring.Trigger.Test
                                               };
             test.InitilizeTrigger("10");
             Thread.Sleep( 1000 );
+        }
+
+
+        [Test]
+        public void Should_Test_Trigger_Activated_At_Specific_Time_And_That_Trigger_Event_Is_Runned( )
+        {
+            Trigger test = new Trigger( );
+
+            test.AddPlugin( "Example", "Example: Run Method" );
+
+            test.TriggerActivatedEvent += (sender, args) =>
+            {
+                foreach ( IPluginResult result in args.GetResults( ) )
+                {
+                    Assert.AreEqual( "Example: Run Method", result.ToString( ) );
+                }
+            };
+            test.InitilizeTrigger( DateTime.Now.AddSeconds(1) );
+            Thread.Sleep( 5000 );
         }
     }
 
