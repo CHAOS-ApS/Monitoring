@@ -33,6 +33,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,13 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CHAOS.Monitoring.Trigger.TimeTrigger\CHAOS.Monitoring.Trigger.TimeTrigger.csproj">
-      <Project>{3EACBE93-1AA6-46AA-A6F8-364BDAD8CBF8}</Project>
-      <Name>CHAOS.Monitoring.Trigger.TimeTrigger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CHAOS.Monitoring.Trigger\CHAOS.Monitoring.Trigger.csproj">
-      <Project>{2A07F5C2-20EA-415A-BA90-2DBFAB7D82C7}</Project>
-      <Name>CHAOS.Monitoring.Trigger</Name>
+    <ProjectReference Include="..\CHAOS.Monitoring.Trigger.Standard\CHAOS.Monitoring.Trigger.Standard.csproj">
+      <Project>{B550CF34-3703-4824-A960-84DC0BD8F6A3}</Project>
+      <Name>CHAOS.Monitoring.Trigger.Standard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

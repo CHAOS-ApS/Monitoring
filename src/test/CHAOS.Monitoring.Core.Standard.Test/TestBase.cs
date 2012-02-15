@@ -18,10 +18,6 @@ namespace CHAOS.Monitoring.Core.Standard.Test
 
             //starts the trigger manager which controlls my triggers
             TriggerManager = new TriggerManager( );
-
-            //create 3 default triggers
-            TriggerManager.CreateTrigger( DateTime.Now );
-            TriggerManager.CreateTrigger( DateTime.Now );
         }
     }
 }

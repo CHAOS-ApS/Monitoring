@@ -10,10 +10,8 @@ namespace CHAOS.Monitoring.Trigger.TimeTrigger
     {
         public TimeTrigger(DateTime dateTime)
         {
-            _triggerActivationDateTime = dateTime;
+            TriggerActivationDateTime = dateTime;
             RunTimer = new Timer( RunPlugins, null, dateTime.Subtract( DateTime.Now ), new TimeSpan( -1 ) );
         }
-
-        private DateTime _triggerActivationDateTime;
     }
 }

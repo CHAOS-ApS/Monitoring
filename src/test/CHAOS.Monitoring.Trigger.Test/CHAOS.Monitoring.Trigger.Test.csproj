@@ -51,14 +51,6 @@
       <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
       <Name>CHAOS.Monitoring.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Trigger.TimeTrigger\CHAOS.Monitoring.Trigger.TimeTrigger.csproj">
-      <Project>{3EACBE93-1AA6-46AA-A6F8-364BDAD8CBF8}</Project>
-      <Name>CHAOS.Monitoring.Trigger.TimeTrigger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Trigger\CHAOS.Monitoring.Trigger.csproj">
-      <Project>{2A07F5C2-20EA-415A-BA90-2DBFAB7D82C7}</Project>
-      <Name>CHAOS.Monitoring.Trigger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

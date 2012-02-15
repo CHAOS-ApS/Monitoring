@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4B98D0A2-77FD-48CE-AA2A-28A58EFBD6BB}</ProjectGuid>
+    <ProjectGuid>{4D975723-1237-4BC3-BD6C-1D4CE3FECEA4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CHAOS.Monitoring.Core.Test</RootNamespace>
-    <AssemblyName>CHAOS.Monitoring.Core.Test</AssemblyName>
+    <RootNamespace>CHAOS.Monitoring.Plugin.Standard</RootNamespace>
+    <AssemblyName>CHAOS.Monitoring.Plugin.Standard</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\tools\nunit\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,21 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TriggerManagerTest.cs" />
+    <Compile Include="PluginFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Core\CHAOS.Monitoring.Core.csproj">
-      <Project>{89A06E27-EBCB-4DF7-B682-81CE49D44A63}</Project>
-      <Name>CHAOS.Monitoring.Core</Name>
+    <ProjectReference Include="..\CHAOS.Monitoring.Plugin.Example\CHAOS.Monitoring.Plugin.Example.csproj">
+      <Project>{9131D357-7849-48AB-986C-A80B7E2F6716}</Project>
+      <Name>CHAOS.Monitoring.Plugin.Example</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Trigger.Standard\CHAOS.Monitoring.Trigger.Standard.csproj">
-      <Project>{B550CF34-3703-4824-A960-84DC0BD8F6A3}</Project>
-      <Name>CHAOS.Monitoring.Trigger.Standard</Name>
+    <ProjectReference Include="..\CHAOS.Monitoring.Plugin.Ping\CHAOS.Monitoring.Plugin.Ping.csproj">
+      <Project>{66565654-CDB3-4F7D-995D-13FC3457899E}</Project>
+      <Name>CHAOS.Monitoring.Plugin.Ping</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CHAOS.Monitoring.Core.Standard.Test\CHAOS.Monitoring.Core.Standard.Test.csproj">
-      <Project>{EF9176AD-2F0E-43D1-A394-9F20F48EE01E}</Project>
-      <Name>CHAOS.Monitoring.Core.Standard.Test</Name>
+    <ProjectReference Include="..\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
+      <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
+      <Name>CHAOS.Monitoring.Plugin</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

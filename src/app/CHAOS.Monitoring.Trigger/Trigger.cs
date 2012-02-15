@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
-using CHAOS.Monitoring.Factory.PluginFactory;
 using CHAOS.Monitoring.Plugin;
+using CHAOS.Monitoring.Plugin.Standard;
 
 namespace CHAOS.Monitoring.Trigger
 {
@@ -10,7 +11,14 @@ namespace CHAOS.Monitoring.Trigger
         public event TriggerActivatedEventHandler TriggerActivatedEvent = delegate { };
 
         protected Timer RunTimer;
+        protected DateTime TriggerActivationDateTime;
         protected List<IPlugin> Plugins = new List<IPlugin>( );
+
+        public Trigger(DateTime dateTime, int interval)
+        {
+            TriggerActivationDateTime = dateTime;
+            RunTimer = new Timer( RunPlugins, null, dateTime.Subtract( DateTime.Now ), new TimeSpan( interval) );
+        }
 
         public IPlugin GetPlugin( int index )
         {

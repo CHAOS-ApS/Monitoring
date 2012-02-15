@@ -10,9 +10,10 @@ namespace CHAOS.Monitoring.Core.Test
         [Test]
         public void Should_Start_Running_Default_Triggers( )
         {
+            
             TriggerManager.GetTrigger(0).AddPlugin( "Ping", "www.google.se" );
             TriggerManager.GetTrigger(1).AddPlugin( "Example", "www.google.se" );
-
+            
             Thread.Sleep( 5000 );
         }
     }

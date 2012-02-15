@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "CHAOS.Monitoring.Trigger.RepeatableTrigger" )]
+[assembly: AssemblyTitle( "CHAOS.Monitoring.Trigger.Standard" )]
 [assembly: AssemblyDescription( "" )]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "Hewlett-Packard" )]
-[assembly: AssemblyProduct( "CHAOS.Monitoring.Trigger.RepeatableTrigger" )]
+[assembly: AssemblyProduct( "CHAOS.Monitoring.Trigger.Standard" )]
 [assembly: AssemblyCopyright( "Copyright © Hewlett-Packard 2012" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible( false )]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid( "e632ce26-83b7-4bd6-b45c-73bc153ce9c8" )]
+[assembly: Guid( "0b2ba8be-9e74-45ee-bc07-f9f410ce1bad" )]
 
 // Version information for an assembly consists of the following four values:
 //
