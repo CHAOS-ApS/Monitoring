@@ -32,7 +32,7 @@ namespace CHAOS.Monitoring.Plugin.Ping
             if ( reply.Status == IPStatus.TimedOut )
                 throw new TimeoutException( );
 
-            result.Result = reply.RoundtripTime;
+            result.RoundtripTime = reply.RoundtripTime;
             return (result);
         }
     }

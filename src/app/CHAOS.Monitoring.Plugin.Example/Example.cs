@@ -6,15 +6,14 @@ namespace CHAOS.Monitoring.Plugin.Example
     {
         public Example( String parameters )
         {
-             _parameters = parameters;
+            _parameters = parameters;
         }
 
         private readonly string _parameters;
 
         public IPluginResult Run( )
         {
-            ExampleResult result = new ExampleResult( );
-            result.Result = _parameters;
+            ExampleResult result = new ExampleResult { ExampleText = _parameters };
             return ( result );
         }
     }

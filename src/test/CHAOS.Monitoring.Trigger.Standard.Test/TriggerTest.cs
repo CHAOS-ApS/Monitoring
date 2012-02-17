@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using CHAOS.Monitoring.Core.Standard.Test;
+using CHAOS.Monitoring.Plugin.Example;
 using NUnit.Framework;
 
 namespace CHAOS.Monitoring.Trigger.Standard.Test
@@ -13,6 +13,7 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         public void Should_Create_Trigger_Without_Repetition( )
         {
             Trigger testTrigger = new Trigger( DateTime.Now, -1 );
+
             Assert.IsNotNull( testTrigger );
         }
 
@@ -20,14 +21,17 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         public void Should_Create_Trigger_Without_Repetition_And_Start_Time_From_The_Past( )
         {
             Trigger testTrigger = new Trigger( new DateTime( 0001, 01, 01, 00, 00, 00 ), -1 );
-            testTrigger.Start();
-            Assert.IsTrue(testTrigger.Status());
+
+            testTrigger.Start( );
+
+            Assert.IsTrue( testTrigger.GetStatus( ) );
         }
 
         [Test]
-        public void Shold_Create_Trigger_With_Repetition( )
+        public void Should_Create_Trigger_With_Repetition( )
         {
             Trigger testTrigger = new Trigger( DateTime.Now, 100 );
+
             Assert.IsNotNull( testTrigger );
         }
 
@@ -36,58 +40,93 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         {
             Trigger testTrigger = new Trigger( DateTime.Now, -1 );
 
-            bool fd = false;
+            testTrigger.AddPlugin( "Example", "Example plugin" );
+
+            Assert.IsNotNull( testTrigger.GetPlugin( 0 ) );
+        }
+
+        [Test]
+        public void Should_Run_One_Plugin( )
+        {
+            Trigger testTrigger = new Trigger( DateTime.Now, -1 );
 
             testTrigger.AddPlugin( "Example", "Example plugin" );
-            
-            testTrigger.TriggerActivatedEvent +=
-                (sender, args) => fd = "Example plugin" == args.GetResults().First().ToString() ;
 
-            testTrigger.Start();
-            Timing.WaitUntil( () => fd, 10000 );
+            bool fd = false;
+
+            testTrigger.TriggerActivatedEvent +=
+                ( sender, args ) => fd = "Example plugin" == ( ( ExampleResult )args.GetResults( ).ElementAt( 0 ) ).ExampleText;
+
+            testTrigger.Start( );
+            Timing.WaitUntil( ( ) => fd, 10000 );
 
             Assert.IsTrue( fd );
         }
 
-
-        //test driven development
-
-
-        /*
-        
-        Test_Trigger_Interval_And_That_Trigger_Event_Is_Runned( )
+        [Test]
+        public void Should_Create_Multiple_Plugins( )
         {
-            Trigger test = new Trigger((DateTime.Now.AddSeconds( 1 ) );
+            Trigger testTrigger = new Trigger( DateTime.Now, -1 );
 
-            test.AddPlugin("Example","Example: Run Method");
+            testTrigger.AddPlugin( "Example", "Example plugin" );
+            testTrigger.AddPlugin( "Ping", "127.0.0.1" );
+            testTrigger.AddPlugin( "Example", "Example plugin2" );
+            testTrigger.AddPlugin( "Ping", "127.0.0.1" );
 
-            test.TriggerActivatedEvent += (sender, args) =>
-                                              {
-                                                  foreach (IPluginResult result in args.GetResults())
-                                                  {
-                                                      Assert.AreEqual("Example: Run Method",result.ToString());
-                                                  }
-                                              };
-            Thread.Sleep( 1000 );
+            Assert.AreEqual( 4, testTrigger.GetAllPlugins( ).Count( ) );
         }
-
 
         [Test]
-        public void Should_Test_Trigger_Activated_At_Specific_Time_And_That_Trigger_Event_Is_Runned( )
+        public void Should_Run_Multiple_Plugins( )
         {
-            ITrigger test = new TimeTrigger.TimeTrigger( DateTime.Now.AddSeconds( 1 ) );
+            Trigger testTrigger = new Trigger( DateTime.Now, -1 );
 
-            test.AddPlugin( "Example", "Example: Run Method" );
+            testTrigger.AddPlugin( "Example", "Example plugin" );
+            testTrigger.AddPlugin( "Ping", "127.0.0.1" );
+            testTrigger.AddPlugin( "Example", "Example plugin2" );
+            testTrigger.AddPlugin( "Ping", "127.0.0.1" );
 
-            test.TriggerActivatedEvent += (sender, args) =>
-            {
-                foreach ( IPluginResult result in args.GetResults( ) )
-                {
-                    Assert.AreEqual( "Example: Run Method", result.ToString( ) );
-                }
-            };
-            Thread.Sleep( 5000 );
+            bool fd = false;
+            testTrigger.TriggerActivatedEvent +=
+                ( sender, args ) => fd = 4 == args.GetResults( ).Count( );
+
+            testTrigger.Start( );
+            Timing.WaitUntil( ( ) => fd, 10000 );
+
+            Assert.IsTrue( fd );
         }
-         * */
+
+        [Test]
+        public void Should_Stop_Trigger()
+        {
+            Trigger testTrigger = new Trigger(DateTime.Now, 10);
+
+            testTrigger.Start();
+            testTrigger.Stop();
+            Assert.IsFalse(testTrigger.GetStatus());
+        }
+
+        [Test]
+        public void Should_Restart_Stopped_Trigger()
+        {
+            Trigger testTrigger = new Trigger( DateTime.Now, 10 );
+
+            testTrigger.Start( );
+            testTrigger.Stop( );
+            testTrigger.Start( );
+            Assert.IsTrue( testTrigger.GetStatus( ) );
+        }
+
+        [Test]
+        public void Should_Stop_A_Stopped_Trigger( )
+        {
+            Trigger testTrigger = new Trigger(DateTime.Now, 10);
+
+            testTrigger.Start();
+            testTrigger.Stop();
+            testTrigger.Stop();
+            Assert.IsFalse(testTrigger.GetStatus());
+        }
+
     }
 }

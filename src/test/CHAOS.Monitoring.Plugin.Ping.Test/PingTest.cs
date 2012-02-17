@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CHAOS.Monitoring.Core.Standard.Test;
 using NUnit.Framework;
 
@@ -13,9 +10,7 @@ namespace CHAOS.Monitoring.Plugin.Ping.Test
         [Test]
         public void Should_Ping_An_IP( )
         {
-            Ping ping = new Ping( "127.0.0.1" );
-
-            Assert.GreaterOrEqual( 0, Convert.ToInt64( ping.Run( ) ) );
+            Assert.GreaterOrEqual( 0, ((PingResult) Ping.Run() ).RoundtripTime );
         }
 
         [Test, ExpectedException( typeof( TimeoutException ) )]
@@ -23,14 +18,6 @@ namespace CHAOS.Monitoring.Plugin.Ping.Test
         {
             Ping ping = new Ping( "137.0.0.0" );
             ping.Run( );
-        }
-
-        [Test]
-        public void Should_Return_PingTime_From_Pinging_IP( )
-        {
-            Ping ping = new Ping( "www.geckon.com" );
-
-            Assert.Greater( Convert.ToInt64( ping.Run( )), 0  );
         }
     }
 }
