@@ -16,40 +16,50 @@ namespace CHAOS.Monitoring.Trigger.Standard
         private Timer _timer;
         private DateTime _startDateTime;
         private List<IPlugin> _plugins = new List<IPlugin>( );
-        private bool _enabled;
-        private int _repetition;
+
+        /// <summary>
+        /// The repetition in milliseconds between each trigger activation. Set to (1-) for no repetition.
+        /// </summary>
+        public int Repetition { get; set; }
+
+        /// <summary>
+        /// The start time of the trigger
+        /// </summary>
+        public DateTime StartDateTime { get; set; }
+        
+        /// <summary>
+        /// The unique ID that each trigger has for easly paring Triggers with Plugins
+        /// </summary>
+        public int Id { get;set; }
 
         /// <summary>
         /// Initilizes the trigger with it's start date & time and also the repetition time of the trigger that determines if the
         /// trigger is repeating or not.
         /// </summary>
+        /// <param name="id">The ID of the trigger used for identifying triggers </param>
         /// <param name="startDateTime">The date and time when the trigger is activated. (DateTime.Now) for instant activation</param>
         /// <param name="repetition">The repetition in milliseconds between trigger activation. (-1) for no repetition.</param>
-        public Trigger( DateTime startDateTime, int repetition )
+        public Trigger( int id , DateTime startDateTime, int repetition )
         {
             _startDateTime = startDateTime;
-            _repetition = repetition;
+            Repetition = repetition;
+            Id = id;
         }
 
-        public void Start( )
+        public bool Start( )
         {
             TimeSpan waitTime = _startDateTime.Subtract( DateTime.Now );
             if ( waitTime.TotalMilliseconds < -1 )
                 waitTime = new TimeSpan( 0 );
 
-            _timer = new Timer( RunPlugins, null, waitTime, new TimeSpan( _repetition ) );
-            _enabled = true;
+            _timer = new Timer( RunPlugins, null, waitTime, new TimeSpan( 0, 0, 0, 0, Repetition ) );
+            return true;
         }
 
-        public void Stop( )
+        public bool Stop( )
         {
             _timer.Dispose();
-            _enabled = false;
-        }
-
-        public bool GetStatus( )
-        {
-            return _enabled;
+            return true;
         }
 
         public IPlugin GetPlugin( int index )
@@ -62,11 +72,16 @@ namespace CHAOS.Monitoring.Trigger.Standard
             return _plugins;
         }
 
-        public void AddPlugin( string pluginType, string parameters )
+        public void AddPlugin( IPlugin plugin )
         {
-            _plugins.Add( PluginFactory.CreatePlugin( pluginType, parameters ) );
+            _plugins.Add( plugin );
         }
-        
+
+        public void RemovePlugin( int index )
+        {
+            _plugins.RemoveAt( index );
+        }
+
         private void RunPlugins( object args )
         {
             PluginResultsArgs resultsArgs = new PluginResultsArgs( );
@@ -78,5 +93,6 @@ namespace CHAOS.Monitoring.Trigger.Standard
 
             TriggerActivatedEvent( this, resultsArgs );
         }
+
     }
 }

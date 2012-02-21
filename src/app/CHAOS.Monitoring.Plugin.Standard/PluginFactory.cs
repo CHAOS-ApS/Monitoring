@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CHAOS.Monitoring.Plugin.Standard
 {
     public static class PluginFactory
     {
-
-        ///TODO: Make dynamic!
+        /// TODO: Make dynamic!
         /// <summary>
         /// Creates a plugin
         /// </summary>

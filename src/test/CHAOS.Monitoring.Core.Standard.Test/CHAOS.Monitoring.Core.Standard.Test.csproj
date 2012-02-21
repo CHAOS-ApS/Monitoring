@@ -43,14 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ObjectKeeperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Timing.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Core\CHAOS.Monitoring.Core.csproj">
-      <Project>{89A06E27-EBCB-4DF7-B682-81CE49D44A63}</Project>
-      <Name>CHAOS.Monitoring.Core</Name>
+    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Core.Standard\CHAOS.Monitoring.Core.Standard.csproj">
+      <Project>{D1D2F506-9DA3-4C89-831E-366C90BF9AB4}</Project>
+      <Name>CHAOS.Monitoring.Core.Standard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\app\CHAOS.Monitoring.Plugin.Ping\CHAOS.Monitoring.Plugin.Ping.csproj">
       <Project>{66565654-CDB3-4F7D-995D-13FC3457899E}</Project>
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\..\app\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
       <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
       <Name>CHAOS.Monitoring.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Trigger.Standard\CHAOS.Monitoring.Trigger.Standard.csproj">
+      <Project>{B550CF34-3703-4824-A960-84DC0BD8F6A3}</Project>
+      <Name>CHAOS.Monitoring.Trigger.Standard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

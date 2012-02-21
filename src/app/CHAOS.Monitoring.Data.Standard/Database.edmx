@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MonitorLibraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MonitorLibraryModelStoreContainer">
+          <EntitySet Name="Plugin" EntityType="MonitorLibraryModel.Store.Plugin" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PluginType" EntityType="MonitorLibraryModel.Store.PluginType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Trigger" EntityType="MonitorLibraryModel.Store.Trigger" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Plugin_PluginType" Association="MonitorLibraryModel.Store.FK_Plugin_PluginType">
+            <End Role="PluginType" EntitySet="PluginType" />
+            <End Role="Plugin" EntitySet="Plugin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plugin_Trigger" Association="MonitorLibraryModel.Store.FK_Plugin_Trigger">
+            <End Role="Trigger" EntitySet="Trigger" />
+            <End Role="Plugin" EntitySet="Plugin" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Plugin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="HostAdress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PluginTypeID" Type="int" Nullable="false" />
+          <Property Name="TriggerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PluginType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nchar" Nullable="false" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Trigger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Repetition" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Plugin_PluginType">
+          <End Role="PluginType" Type="MonitorLibraryModel.Store.PluginType" Multiplicity="1" />
+          <End Role="Plugin" Type="MonitorLibraryModel.Store.Plugin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PluginType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Plugin">
+              <PropertyRef Name="PluginTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plugin_Trigger">
+          <End Role="Trigger" Type="MonitorLibraryModel.Store.Trigger" Multiplicity="1" />
+          <End Role="Plugin" Type="MonitorLibraryModel.Store.Plugin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trigger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Plugin">
+              <PropertyRef Name="TriggerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Plugins_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Triggers_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MonitorLibraryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MonitorLibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Plugin" EntityType="MonitorLibraryModel.Plugin" />
+          <EntitySet Name="PluginType" EntityType="MonitorLibraryModel.PluginType" />
+          <EntitySet Name="Trigger" EntityType="MonitorLibraryModel.Trigger" />
+          <AssociationSet Name="FK_Plugin_PluginType" Association="MonitorLibraryModel.FK_Plugin_PluginType">
+            <End Role="PluginType" EntitySet="PluginType" />
+            <End Role="Plugin" EntitySet="Plugin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plugin_Trigger" Association="MonitorLibraryModel.FK_Plugin_Trigger">
+            <End Role="Trigger" EntitySet="Trigger" />
+            <End Role="Plugin" EntitySet="Plugin" />
+          </AssociationSet>
+          <FunctionImport Name="Plugins_Get" EntitySet="Plugin" ReturnType="Collection(MonitorLibraryModel.Plugin)" />
+          <FunctionImport Name="Triggers_Get" EntitySet="Trigger" ReturnType="Collection(MonitorLibraryModel.Trigger)" />
+        </EntityContainer>
+        <EntityType Name="Plugin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="HostAdress" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="PluginTypeID" Nullable="false" />
+          <Property Type="Int32" Name="TriggerID" Nullable="false" />
+          <NavigationProperty Name="PluginType" Relationship="MonitorLibraryModel.FK_Plugin_PluginType" FromRole="Plugin" ToRole="PluginType" />
+          <NavigationProperty Name="Trigger" Relationship="MonitorLibraryModel.FK_Plugin_Trigger" FromRole="Plugin" ToRole="Trigger" />
+        </EntityType>
+        <EntityType Name="PluginType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Plugin" Relationship="MonitorLibraryModel.FK_Plugin_PluginType" FromRole="PluginType" ToRole="Plugin" />
+        </EntityType>
+        <EntityType Name="Trigger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" />
+          <Property Name="Repetition" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plugin" Relationship="MonitorLibraryModel.FK_Plugin_Trigger" FromRole="Trigger" ToRole="Plugin" />
+        </EntityType>
+        <Association Name="FK_Plugin_PluginType">
+          <End Type="MonitorLibraryModel.PluginType" Role="PluginType" Multiplicity="1" />
+          <End Type="MonitorLibraryModel.Plugin" Role="Plugin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PluginType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Plugin">
+              <PropertyRef Name="PluginTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plugin_Trigger">
+          <End Type="MonitorLibraryModel.Trigger" Role="Trigger" Multiplicity="1" />
+          <End Type="MonitorLibraryModel.Plugin" Role="Plugin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trigger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Plugin">
+              <PropertyRef Name="TriggerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MonitorLibraryModelStoreContainer" CdmEntityContainer="MonitorLibraryEntities">
+          <EntitySetMapping Name="Plugin"><EntityTypeMapping TypeName="MonitorLibraryModel.Plugin"><MappingFragment StoreEntitySet="Plugin">
+            <ScalarProperty Name="TriggerID" ColumnName="TriggerID" />
+                <ScalarProperty Name="PluginTypeID" ColumnName="PluginTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="HostAdress" ColumnName="HostAdress" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PluginType"><EntityTypeMapping TypeName="MonitorLibraryModel.PluginType"><MappingFragment StoreEntitySet="PluginType">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Type" ColumnName="Type" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Trigger"><EntityTypeMapping TypeName="MonitorLibraryModel.Trigger"><MappingFragment StoreEntitySet="Trigger">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+            <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+            <ScalarProperty Name="Repetition" ColumnName="Repetition" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Plugins_Get" FunctionName="MonitorLibraryModel.Store.Plugins_Get" />
+          <FunctionImportMapping FunctionImportName="Triggers_Get" FunctionName="MonitorLibraryModel.Store.Triggers_Get" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Database">
+        <EntityTypeShape EntityType="MonitorLibraryModel.Plugin" Width="1.5" PointX="0.75" PointY="0.75" Height="1.4033821614583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="MonitorLibraryModel.PluginType" Width="1.5" PointX="3.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MonitorLibraryModel.Trigger" Width="1.5" PointX="0.75" PointY="4.125" Height="1.9802864583333335" IsExpanded="true" />
+        <AssociationConnector Association="MonitorLibraryModel.FK_Plugin_PluginType" >
+          <ConnectorPoint PointX="3.75" PointY="1.547841796875" />
+          <ConnectorPoint PointX="2.25" PointY="1.547841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="MonitorLibraryModel.FK_Plugin_Trigger" >
+          <ConnectorPoint PointX="1.5" PointY="4.125" />
+          <ConnectorPoint PointX="1.5" PointY="2.922587890625" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
