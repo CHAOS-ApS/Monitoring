@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ObjectKeeperTest.cs" />
+    <Compile Include="DataSyncTest.cs" />
+    <Compile Include="TriggersAndPluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Timing.cs" />
@@ -65,6 +66,9 @@
       <Project>{B550CF34-3703-4824-A960-84DC0BD8F6A3}</Project>
       <Name>CHAOS.Monitoring.Trigger.Standard</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

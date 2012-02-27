@@ -60,7 +60,7 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         {
             Trigger testTrigger = new Trigger( 1, DateTime.Now, -1 );
 
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Example", "Example plugin" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "Example plugin" ) );
 
             Assert.IsNotNull( testTrigger.GetPlugin( 0 ) );
         }
@@ -70,7 +70,7 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         {
             Trigger testTrigger = new Trigger( 1, DateTime.Now, -1 );
 
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Example", "Example plugin" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "Example plugin" ) );
 
             bool fd = false;
 
@@ -88,10 +88,10 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         {
             Trigger testTrigger = new Trigger( 1, DateTime.Now, -1 );
 
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Example", "Example plugin" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Ping", "127.0.0.1" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Example", "Example plugin2" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Ping", "127.0.0.1" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "Example plugin" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Ping", "127.0.0.1" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "Example plugin2" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Ping", "127.0.0.1" ) );
 
             Assert.AreEqual( 4, testTrigger.GetAllPlugins( ).Count( ) );
         }
@@ -101,10 +101,10 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         {
             Trigger testTrigger = new Trigger( 1, DateTime.Now, -1 );
 
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Example", "Example plugin" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Ping", "127.0.0.1" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Example", "Example plugin2" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Ping", "127.0.0.1" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "Example plugin" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Ping", "127.0.0.1" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "Example plugin2" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Ping", "127.0.0.1" ) );
 
             bool fd = false;
             testTrigger.TriggerActivatedEvent +=
@@ -140,7 +140,7 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         {
             Trigger testTrigger = new Trigger( 1, DateTime.Now, 10 );
 
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( "Example", "example testaka" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "example testaka" ) );
             testTrigger.RemovePlugin( 0 );
 
             Assert.IsEmpty( testTrigger.GetAllPlugins( ) );

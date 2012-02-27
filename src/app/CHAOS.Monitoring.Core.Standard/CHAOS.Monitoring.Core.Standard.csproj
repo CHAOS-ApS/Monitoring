@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,10 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ObjectKeeper.cs" />
+    <Compile Include="DataSync.cs" />
+    <Compile Include="PluginLoader.cs" />
+    <Compile Include="TriggersAndPluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CHAOS.Monitoring.Data.Standard\CHAOS.Monitoring.Data.Standard.csproj">
+      <Project>{28187628-FDE7-44BC-815F-A73C3708F1B6}</Project>
+      <Name>CHAOS.Monitoring.Data.Standard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CHAOS.Monitoring.Plugin.Standard\CHAOS.Monitoring.Plugin.Standard.csproj">
       <Project>{4D975723-1237-4BC3-BD6C-1D4CE3FECEA4}</Project>
       <Name>CHAOS.Monitoring.Plugin.Standard</Name>

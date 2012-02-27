@@ -48,7 +48,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataSync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,13 +57,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CHAOS.Monitoring.Core.Standard\CHAOS.Monitoring.Core.Standard.csproj">
-      <Project>{D1D2F506-9DA3-4C89-831E-366C90BF9AB4}</Project>
-      <Name>CHAOS.Monitoring.Core.Standard</Name>
-    </ProjectReference>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

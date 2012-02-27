@@ -16,7 +16,7 @@ namespace CHAOS.Monitoring.Plugin.Ping.Test
         [Test, ExpectedException( typeof( TimeoutException ) )]
         public void Should_Throw_TimeoutException_If_IP_Is_Unreachable( )
         {
-            Ping ping = new Ping( "137.0.0.0" );
+            Ping ping = new Ping(1,1, "137.0.0.0" );
             ping.Run( );
         }
     }

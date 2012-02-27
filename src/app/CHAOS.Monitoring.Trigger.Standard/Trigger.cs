@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using CHAOS.Monitoring.Plugin;
-using CHAOS.Monitoring.Plugin.Standard;
 
 namespace CHAOS.Monitoring.Trigger.Standard
 {

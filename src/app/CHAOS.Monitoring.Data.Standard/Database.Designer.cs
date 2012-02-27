@@ -118,6 +118,22 @@ namespace CHAOS.Monitoring.Data.Standard
             }
         }
         private ObjectSet<Trigger> _Trigger;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PluginInfo> PluginInfo
+        {
+            get
+            {
+                if ((_PluginInfo == null))
+                {
+                    _PluginInfo = base.CreateObjectSet<PluginInfo>("PluginInfo");
+                }
+                return _PluginInfo;
+            }
+        }
+        private ObjectSet<PluginInfo> _PluginInfo;
 
         #endregion
         #region AddTo Methods
@@ -145,6 +161,14 @@ namespace CHAOS.Monitoring.Data.Standard
         {
             base.AddObject("Trigger", trigger);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PluginInfo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPluginInfo(PluginInfo pluginInfo)
+        {
+            base.AddObject("PluginInfo", pluginInfo);
+        }
 
         #endregion
         #region Function Imports
@@ -152,33 +176,33 @@ namespace CHAOS.Monitoring.Data.Standard
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectResult<Plugin> Plugins_Get()
+        public ObjectResult<Trigger> Trigger_Get()
         {
-            return base.ExecuteFunction<Plugin>("Plugins_Get");
+            return base.ExecuteFunction<Trigger>("Trigger_Get");
         }
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         /// <param name="mergeOption"></param>
-        public ObjectResult<Plugin> Plugins_Get(MergeOption mergeOption)
+        public ObjectResult<Trigger> Trigger_Get(MergeOption mergeOption)
         {
-            return base.ExecuteFunction<Plugin>("Plugins_Get", mergeOption);
+            return base.ExecuteFunction<Trigger>("Trigger_Get", mergeOption);
         }
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectResult<Trigger> Triggers_Get()
+        public ObjectResult<PluginInfo> PluginInfo_Get()
         {
-            return base.ExecuteFunction<Trigger>("Triggers_Get");
+            return base.ExecuteFunction<PluginInfo>("PluginInfo_Get");
         }
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         /// <param name="mergeOption"></param>
-        public ObjectResult<Trigger> Triggers_Get(MergeOption mergeOption)
+        public ObjectResult<PluginInfo> PluginInfo_Get(MergeOption mergeOption)
         {
-            return base.ExecuteFunction<Trigger>("Triggers_Get", mergeOption);
+            return base.ExecuteFunction<PluginInfo>("PluginInfo_Get", mergeOption);
         }
 
         #endregion
@@ -399,6 +423,148 @@ namespace CHAOS.Monitoring.Data.Standard
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MonitorLibraryModel", Name="PluginInfo")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PluginInfo : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PluginInfo object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="triggerID">Initial value of the TriggerID property.</param>
+        /// <param name="hostAdress">Initial value of the HostAdress property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
+        public static PluginInfo CreatePluginInfo(global::System.Int32 id, global::System.Int32 triggerID, global::System.String hostAdress, global::System.String type)
+        {
+            PluginInfo pluginInfo = new PluginInfo();
+            pluginInfo.ID = id;
+            pluginInfo.TriggerID = triggerID;
+            pluginInfo.HostAdress = hostAdress;
+            pluginInfo.Type = type;
+            return pluginInfo;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TriggerID
+        {
+            get
+            {
+                return _TriggerID;
+            }
+            set
+            {
+                if (_TriggerID != value)
+                {
+                    OnTriggerIDChanging(value);
+                    ReportPropertyChanging("TriggerID");
+                    _TriggerID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TriggerID");
+                    OnTriggerIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _TriggerID;
+        partial void OnTriggerIDChanging(global::System.Int32 value);
+        partial void OnTriggerIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String HostAdress
+        {
+            get
+            {
+                return _HostAdress;
+            }
+            set
+            {
+                if (_HostAdress != value)
+                {
+                    OnHostAdressChanging(value);
+                    ReportPropertyChanging("HostAdress");
+                    _HostAdress = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("HostAdress");
+                    OnHostAdressChanged();
+                }
+            }
+        }
+        private global::System.String _HostAdress;
+        partial void OnHostAdressChanging(global::System.String value);
+        partial void OnHostAdressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                if (_Type != value)
+                {
+                    OnTypeChanging(value);
+                    ReportPropertyChanging("Type");
+                    _Type = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Type");
+                    OnTypeChanged();
+                }
+            }
+        }
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
+
+        #endregion
+    
     }
     
     /// <summary>
