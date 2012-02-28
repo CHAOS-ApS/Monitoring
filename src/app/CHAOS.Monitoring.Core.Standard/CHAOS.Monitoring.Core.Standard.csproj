@@ -51,10 +51,6 @@
       <Project>{28187628-FDE7-44BC-815F-A73C3708F1B6}</Project>
       <Name>CHAOS.Monitoring.Data.Standard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CHAOS.Monitoring.Plugin.Standard\CHAOS.Monitoring.Plugin.Standard.csproj">
-      <Project>{4D975723-1237-4BC3-BD6C-1D4CE3FECEA4}</Project>
-      <Name>CHAOS.Monitoring.Plugin.Standard</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
       <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
       <Name>CHAOS.Monitoring.Plugin</Name>
@@ -65,6 +61,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

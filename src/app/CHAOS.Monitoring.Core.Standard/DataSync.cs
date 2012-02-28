@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using CHAOS.Monitoring.Data.Standard;
-using CHAOS.Monitoring.Plugin.Standard;
 
 namespace CHAOS.Monitoring.Core.Standard
 {
@@ -26,7 +25,7 @@ namespace CHAOS.Monitoring.Core.Standard
             {
                 foreach (var plugin in db.PluginInfo_Get())
                 {
-                    plugins.Add(PluginFactory.CreatePlugin(plugin.ID,plugin.TriggerID,plugin.Type,plugin.HostAdress));
+                    plugins.Add(PluginLoader PluginFactory.CreatePlugin(plugin.PluginID,plugin.TriggerID,plugin.Classpath,Type,plugin.HostAdress));
                 }
             }
             return plugins;

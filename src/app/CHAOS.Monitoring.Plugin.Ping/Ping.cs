@@ -6,6 +6,10 @@ namespace CHAOS.Monitoring.Plugin.Ping
 {
     public class Ping : IPlugin
     {
+        public Ping()
+        {
+                
+        }
         /// <summary>
         /// Initilizes the plugin with the host it shall ping
         /// </summary>

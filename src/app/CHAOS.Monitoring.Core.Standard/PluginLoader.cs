@@ -1,48 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using CHAOS.Monitoring.Plugin;
 
 namespace CHAOS.Monitoring.Core.Standard
 {
-    public static class PluginLoader
+    public class PluginLoader
     {
-        private static readonly IDictionary<string, Assembly> _LoadedAssemblies = new Dictionary<string, Assembly>( );
+        private readonly IDictionary<string, Assembly> _LoadedAssemblies = new Dictionary<string, Assembly>( );
 
-        private static IDictionary<string, Assembly> LoadedAssemblies
+        private IDictionary<string, Assembly> LoadedAssemblies
         {
             get { return _LoadedAssemblies; }
         }
 
-        public static int Count
+        public int Count
         {
             get { return LoadedAssemblies.Count; }
         }
 
-        public static void Add( string assemblyIdentifier, string assemblyUrl )
+        public void Add( string assemblyIdentifier, string assemblyUrl )
         {
             LoadedAssemblies.Add( assemblyIdentifier, Assembly.LoadFrom( assemblyUrl ) );
         }
 
-        public static T GetPlugin<T>( string assemblyIdentifier, string assembly, string classname ) where T : IPlugin
+        public IPlugin GetPlugin( string assemblyIdentifier, string classpath )
         {
-            return ( T )LoadedAssemblies[ assemblyIdentifier ].CreateInstance( assembly + "." + classname );
+            return ( IPlugin )LoadedAssemblies[ assemblyIdentifier ].CreateInstance( classpath );
         }
-
-        public static T GetPlugin<T>( string version, string fullname ) where T : IPlugin
-        {
-            string assembly = fullname.Substring( 0, fullname.LastIndexOf( "." ) );
-            string key = version + ", " + assembly;
-
-            if ( !LoadedAssemblies.ContainsKey( key ) )
-                throw new KeyNotFoundException( key + " wasn't present in the dictionary" );
-
-            return ( T )LoadedAssemblies[ key ].CreateInstance( fullname );
-        }
-
-
-
     }
 }

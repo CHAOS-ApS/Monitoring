@@ -11,10 +11,11 @@
           <EntitySet Name="Trigger" EntityType="MonitorLibraryModel.Store.Trigger" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PluginInfo" EntityType="MonitorLibraryModel.Store.PluginInfo" store:Type="Views" store:Schema="dbo" store:Name="PluginInfo">
             <DefiningQuery>SELECT 
-      [PluginInfo].[ID] AS [ID], 
+      [PluginInfo].[PluginID] AS [PluginID], 
       [PluginInfo].[TriggerID] AS [TriggerID], 
       [PluginInfo].[HostAdress] AS [HostAdress], 
-      [PluginInfo].[Type] AS [Type]
+      [PluginInfo].[Classpath] AS [Classpath], 
+      [PluginInfo].[PluginTypeID] AS [PluginTypeID]
       FROM [dbo].[PluginInfo] AS [PluginInfo]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Plugin_PluginType" Association="MonitorLibraryModel.Store.FK_Plugin_PluginType">
@@ -40,7 +41,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Classpath" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Trigger">
           <Key>
@@ -56,15 +57,17 @@
       -->
         <EntityType Name="PluginInfo">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="PluginID" />
             <PropertyRef Name="TriggerID" />
             <PropertyRef Name="HostAdress" />
-            <PropertyRef Name="Type" />
+            <PropertyRef Name="Classpath" />
+            <PropertyRef Name="PluginTypeID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PluginID" Type="int" Nullable="false" />
           <Property Name="TriggerID" Type="int" Nullable="false" />
           <Property Name="HostAdress" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Classpath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PluginTypeID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Plugin_PluginType">
           <End Role="PluginType" Type="MonitorLibraryModel.Store.PluginType" Multiplicity="1" />
@@ -97,27 +100,37 @@
     <edmx:ConceptualModels>
       <Schema Namespace="MonitorLibraryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="MonitorLibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Trigger" EntityType="MonitorLibraryModel.Trigger" />
+          <FunctionImport Name="Trigger_Get" EntitySet="Trigger" ReturnType="Collection(MonitorLibraryModel.Trigger)" />
+          <FunctionImport Name="PluginInfo_Get" EntitySet="PluginInfo" ReturnType="Collection(MonitorLibraryModel.PluginInfo)" />
           <EntitySet Name="Plugin" EntityType="MonitorLibraryModel.Plugin" />
           <EntitySet Name="PluginType" EntityType="MonitorLibraryModel.PluginType" />
+          <EntitySet Name="PluginInfo" EntityType="MonitorLibraryModel.PluginInfo" />
           <AssociationSet Name="FK_Plugin_PluginType" Association="MonitorLibraryModel.FK_Plugin_PluginType">
             <End Role="PluginType" EntitySet="PluginType" />
             <End Role="Plugin" EntitySet="Plugin" />
           </AssociationSet>
-          <EntitySet Name="Trigger" EntityType="MonitorLibraryModel.Trigger" />
           <AssociationSet Name="FK_Plugin_Trigger" Association="MonitorLibraryModel.FK_Plugin_Trigger">
             <End Role="Trigger" EntitySet="Trigger" />
             <End Role="Plugin" EntitySet="Plugin" />
           </AssociationSet>
-          <FunctionImport Name="Trigger_Get" EntitySet="Trigger" ReturnType="Collection(MonitorLibraryModel.Trigger)" />
-          <EntitySet Name="PluginInfo" EntityType="MonitorLibraryModel.PluginInfo" />
-          <FunctionImport Name="PluginInfo_Get" EntitySet="PluginInfo" ReturnType="Collection(MonitorLibraryModel.PluginInfo)" />
         </EntityContainer>
+        <EntityType Name="Trigger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" />
+          <Property Type="DateTime" Name="StartDateTime" Nullable="false" />
+          <Property Type="Int32" Name="Repetition" Nullable="false" />
+          <NavigationProperty Name="Plugin" Relationship="MonitorLibraryModel.FK_Plugin_Trigger" FromRole="Trigger" ToRole="Plugin" />
+        </EntityType>
         <EntityType Name="Plugin">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="HostAdress" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="HostAdress" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="PluginTypeID" Nullable="false" />
           <Property Type="Int32" Name="TriggerID" Nullable="false" />
           <NavigationProperty Name="PluginType" Relationship="MonitorLibraryModel.FK_Plugin_PluginType" FromRole="Plugin" ToRole="PluginType" />
@@ -127,9 +140,23 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Classpath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Plugin" Relationship="MonitorLibraryModel.FK_Plugin_PluginType" FromRole="PluginType" ToRole="Plugin" />
+        </EntityType>
+        <EntityType Name="PluginInfo">
+          <Key>
+            <PropertyRef Name="PluginID" />
+            <PropertyRef Name="TriggerID" />
+            <PropertyRef Name="HostAdress" />
+            <PropertyRef Name="Classpath" />
+            <PropertyRef Name="PluginTypeID" />
+          </Key>
+          <Property Type="Int32" Name="PluginID" Nullable="false" />
+          <Property Type="Int32" Name="TriggerID" Nullable="false" />
+          <Property Type="String" Name="HostAdress" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Classpath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PluginTypeID" Nullable="false" />
         </EntityType>
         <Association Name="FK_Plugin_PluginType">
           <End Type="MonitorLibraryModel.PluginType" Role="PluginType" Multiplicity="1" />
@@ -143,16 +170,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Trigger">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Boolean" Name="Enabled" Nullable="false" />
-          <Property Type="DateTime" Name="StartDateTime" Nullable="false" />
-          <Property Type="Int32" Name="Repetition" Nullable="false" />
-          <NavigationProperty Name="Plugin" Relationship="MonitorLibraryModel.FK_Plugin_Trigger" FromRole="Trigger" ToRole="Plugin" />
-        </EntityType>
         <Association Name="FK_Plugin_Trigger">
           <End Type="MonitorLibraryModel.Trigger" Role="Trigger" Multiplicity="1" />
           <End Type="MonitorLibraryModel.Plugin" Role="Plugin" Multiplicity="*" />
@@ -165,34 +182,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="PluginInfo">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="TriggerID" />
-            <PropertyRef Name="HostAdress" />
-            <PropertyRef Name="Type" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="TriggerID" Nullable="false" />
-          <Property Type="String" Name="HostAdress" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Type" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MonitorLibraryModelStoreContainer" CdmEntityContainer="MonitorLibraryEntities">
-          <EntitySetMapping Name="Plugin"><EntityTypeMapping TypeName="MonitorLibraryModel.Plugin"><MappingFragment StoreEntitySet="Plugin">
-            <ScalarProperty Name="TriggerID" ColumnName="TriggerID" />
-                <ScalarProperty Name="PluginTypeID" ColumnName="PluginTypeID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-            <ScalarProperty Name="HostAdress" ColumnName="HostAdress" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="PluginType"><EntityTypeMapping TypeName="MonitorLibraryModel.PluginType"><MappingFragment StoreEntitySet="PluginType">
-            <ScalarProperty Name="ID" ColumnName="ID" />
-            <ScalarProperty Name="Type" ColumnName="Type" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Trigger">
             <EntityTypeMapping TypeName="MonitorLibraryModel.Trigger">
               <MappingFragment StoreEntitySet="Trigger">
@@ -204,17 +199,36 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Trigger_Get" FunctionName="MonitorLibraryModel.Store.Trigger_Get" />
-          <EntitySetMapping Name="PluginInfo">
-            <EntityTypeMapping TypeName="MonitorLibraryModel.PluginInfo">
-              <MappingFragment StoreEntitySet="PluginInfo">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="HostAdress" ColumnName="HostAdress" />
+          <FunctionImportMapping FunctionImportName="PluginInfo_Get" FunctionName="MonitorLibraryModel.Store.PluginInfo_Get" />
+          <EntitySetMapping Name="Plugin">
+            <EntityTypeMapping TypeName="MonitorLibraryModel.Plugin">
+              <MappingFragment StoreEntitySet="Plugin">
                 <ScalarProperty Name="TriggerID" ColumnName="TriggerID" />
+                <ScalarProperty Name="PluginTypeID" ColumnName="PluginTypeID" />
+                <ScalarProperty Name="HostAdress" ColumnName="HostAdress" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="PluginInfo_Get" FunctionName="MonitorLibraryModel.Store.PluginInfo_Get" />
+          <EntitySetMapping Name="PluginType">
+            <EntityTypeMapping TypeName="MonitorLibraryModel.PluginType">
+              <MappingFragment StoreEntitySet="PluginType">
+                <ScalarProperty Name="Classpath" ColumnName="Classpath" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PluginInfo">
+            <EntityTypeMapping TypeName="MonitorLibraryModel.PluginInfo">
+              <MappingFragment StoreEntitySet="PluginInfo">
+                <ScalarProperty Name="PluginTypeID" ColumnName="PluginTypeID" />
+                <ScalarProperty Name="Classpath" ColumnName="Classpath" />
+                <ScalarProperty Name="HostAdress" ColumnName="HostAdress" />
+                <ScalarProperty Name="TriggerID" ColumnName="TriggerID" />
+                <ScalarProperty Name="PluginID" ColumnName="PluginID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -236,18 +250,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Database">
-        <EntityTypeShape EntityType="MonitorLibraryModel.Plugin" Width="1.5" PointX="0.75" PointY="0.75" Height="1.4033821614583331" IsExpanded="true" />
-        <EntityTypeShape EntityType="MonitorLibraryModel.PluginType" Width="1.5" PointX="3.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
-        <AssociationConnector Association="MonitorLibraryModel.FK_Plugin_PluginType" >
-          <ConnectorPoint PointX="3.75" PointY="1.5478417968750002" />
-          <ConnectorPoint PointX="2.25" PointY="1.5478417968750002" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="MonitorLibraryModel.Trigger" Width="1.5" PointX="0.75" PointY="3.875" Height="1.9802864583333335" />
-        <AssociationConnector Association="MonitorLibraryModel.FK_Plugin_Trigger" >
-          <ConnectorPoint PointX="1.5" PointY="3.875" />
-          <ConnectorPoint PointX="1.5" PointY="2.922587890625" />
+        <EntityTypeShape EntityType="MonitorLibraryModel.Plugin" Width="1.5" PointX="0.875" PointY="0.875" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="MonitorLibraryModel.PluginType" Width="1.5" PointX="3.25" PointY="0.875" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="MonitorLibraryModel.PluginInfo" Width="1.5" PointX="3.25" PointY="3.25" Height="1.9802864583333317" />
+        <AssociationConnector Association="MonitorLibraryModel.FK_Plugin_PluginType" >
+          <ConnectorPoint PointX="3.25" PointY="1.6728417968749998" />
+          <ConnectorPoint PointX="2.375" PointY="1.6728417968749998" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="MonitorLibraryModel.PluginInfo" Width="1.5" PointX="3.375" PointY="3.75" Height="1.7879850260416657" />
+        <AssociationConnector Association="MonitorLibraryModel.FK_Plugin_Trigger" >
+          <ConnectorPoint PointX="1.5625" PointY="3.875" />
+          <ConnectorPoint PointX="1.5625" PointY="3.0475878906249996" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

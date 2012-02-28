@@ -74,6 +74,22 @@ namespace CHAOS.Monitoring.Data.Standard
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Trigger> Trigger
+        {
+            get
+            {
+                if ((_Trigger == null))
+                {
+                    _Trigger = base.CreateObjectSet<Trigger>("Trigger");
+                }
+                return _Trigger;
+            }
+        }
+        private ObjectSet<Trigger> _Trigger;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Plugin> Plugin
         {
             get
@@ -106,22 +122,6 @@ namespace CHAOS.Monitoring.Data.Standard
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Trigger> Trigger
-        {
-            get
-            {
-                if ((_Trigger == null))
-                {
-                    _Trigger = base.CreateObjectSet<Trigger>("Trigger");
-                }
-                return _Trigger;
-            }
-        }
-        private ObjectSet<Trigger> _Trigger;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<PluginInfo> PluginInfo
         {
             get
@@ -139,6 +139,14 @@ namespace CHAOS.Monitoring.Data.Standard
         #region AddTo Methods
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Trigger EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTrigger(Trigger trigger)
+        {
+            base.AddObject("Trigger", trigger);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Plugin EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToPlugin(Plugin plugin)
@@ -152,14 +160,6 @@ namespace CHAOS.Monitoring.Data.Standard
         public void AddToPluginType(PluginType pluginType)
         {
             base.AddObject("PluginType", pluginType);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Trigger EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTrigger(Trigger trigger)
-        {
-            base.AddObject("Trigger", trigger);
         }
     
         /// <summary>
@@ -438,17 +438,19 @@ namespace CHAOS.Monitoring.Data.Standard
         /// <summary>
         /// Create a new PluginInfo object.
         /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="pluginID">Initial value of the PluginID property.</param>
         /// <param name="triggerID">Initial value of the TriggerID property.</param>
         /// <param name="hostAdress">Initial value of the HostAdress property.</param>
-        /// <param name="type">Initial value of the Type property.</param>
-        public static PluginInfo CreatePluginInfo(global::System.Int32 id, global::System.Int32 triggerID, global::System.String hostAdress, global::System.String type)
+        /// <param name="classpath">Initial value of the Classpath property.</param>
+        /// <param name="pluginTypeID">Initial value of the PluginTypeID property.</param>
+        public static PluginInfo CreatePluginInfo(global::System.Int32 pluginID, global::System.Int32 triggerID, global::System.String hostAdress, global::System.String classpath, global::System.Int32 pluginTypeID)
         {
             PluginInfo pluginInfo = new PluginInfo();
-            pluginInfo.ID = id;
+            pluginInfo.PluginID = pluginID;
             pluginInfo.TriggerID = triggerID;
             pluginInfo.HostAdress = hostAdress;
-            pluginInfo.Type = type;
+            pluginInfo.Classpath = classpath;
+            pluginInfo.PluginTypeID = pluginTypeID;
             return pluginInfo;
         }
 
@@ -460,27 +462,27 @@ namespace CHAOS.Monitoring.Data.Standard
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 ID
+        public global::System.Int32 PluginID
         {
             get
             {
-                return _ID;
+                return _PluginID;
             }
             set
             {
-                if (_ID != value)
+                if (_PluginID != value)
                 {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
+                    OnPluginIDChanging(value);
+                    ReportPropertyChanging("PluginID");
+                    _PluginID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PluginID");
+                    OnPluginIDChanged();
                 }
             }
         }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
+        private global::System.Int32 _PluginID;
+        partial void OnPluginIDChanging(global::System.Int32 value);
+        partial void OnPluginIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -541,27 +543,54 @@ namespace CHAOS.Monitoring.Data.Standard
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Type
+        public global::System.String Classpath
         {
             get
             {
-                return _Type;
+                return _Classpath;
             }
             set
             {
-                if (_Type != value)
+                if (_Classpath != value)
                 {
-                    OnTypeChanging(value);
-                    ReportPropertyChanging("Type");
-                    _Type = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Type");
-                    OnTypeChanged();
+                    OnClasspathChanging(value);
+                    ReportPropertyChanging("Classpath");
+                    _Classpath = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Classpath");
+                    OnClasspathChanged();
                 }
             }
         }
-        private global::System.String _Type;
-        partial void OnTypeChanging(global::System.String value);
-        partial void OnTypeChanged();
+        private global::System.String _Classpath;
+        partial void OnClasspathChanging(global::System.String value);
+        partial void OnClasspathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PluginTypeID
+        {
+            get
+            {
+                return _PluginTypeID;
+            }
+            set
+            {
+                if (_PluginTypeID != value)
+                {
+                    OnPluginTypeIDChanging(value);
+                    ReportPropertyChanging("PluginTypeID");
+                    _PluginTypeID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PluginTypeID");
+                    OnPluginTypeIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PluginTypeID;
+        partial void OnPluginTypeIDChanging(global::System.Int32 value);
+        partial void OnPluginTypeIDChanged();
 
         #endregion
     
@@ -581,12 +610,12 @@ namespace CHAOS.Monitoring.Data.Standard
         /// Create a new PluginType object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="type">Initial value of the Type property.</param>
-        public static PluginType CreatePluginType(global::System.Int32 id, global::System.String type)
+        /// <param name="classpath">Initial value of the Classpath property.</param>
+        public static PluginType CreatePluginType(global::System.Int32 id, global::System.String classpath)
         {
             PluginType pluginType = new PluginType();
             pluginType.ID = id;
-            pluginType.Type = type;
+            pluginType.Classpath = classpath;
             return pluginType;
         }
 
@@ -625,24 +654,24 @@ namespace CHAOS.Monitoring.Data.Standard
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Type
+        public global::System.String Classpath
         {
             get
             {
-                return _Type;
+                return _Classpath;
             }
             set
             {
-                OnTypeChanging(value);
-                ReportPropertyChanging("Type");
-                _Type = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Type");
-                OnTypeChanged();
+                OnClasspathChanging(value);
+                ReportPropertyChanging("Classpath");
+                _Classpath = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Classpath");
+                OnClasspathChanged();
             }
         }
-        private global::System.String _Type;
-        partial void OnTypeChanging(global::System.String value);
-        partial void OnTypeChanged();
+        private global::System.String _Classpath;
+        partial void OnClasspathChanging(global::System.String value);
+        partial void OnClasspathChanged();
 
         #endregion
     

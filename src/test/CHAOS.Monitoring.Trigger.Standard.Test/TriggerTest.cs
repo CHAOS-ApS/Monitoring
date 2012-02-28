@@ -2,7 +2,6 @@
 using System.Linq;
 using CHAOS.Monitoring.Core.Standard.Test;
 using CHAOS.Monitoring.Plugin.Example;
-using CHAOS.Monitoring.Plugin.Standard;
 using NUnit.Framework;
 
 namespace CHAOS.Monitoring.Trigger.Standard.Test
@@ -14,7 +13,9 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
         public void Should_Create_Trigger_Without_Repetition( )
         {
             Trigger testTrigger = new Trigger( 1, DateTime.Now, -1 );
-
+            
+            Console.WriteLine(testTrigger.GetType().FullName);
+            
             Assert.IsNotNull( testTrigger );
         }
 
@@ -102,9 +103,9 @@ namespace CHAOS.Monitoring.Trigger.Standard.Test
             Trigger testTrigger = new Trigger( 1, DateTime.Now, -1 );
 
             testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "Example plugin" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Ping", "127.0.0.1" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Example", "Example plugin2" ) );
-            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 1, 1, "Ping", "127.0.0.1" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 2, 1, "Ping", "127.0.0.1" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 3, 1, "Example", "Example plugin2" ) );
+            testTrigger.AddPlugin( PluginFactory.CreatePlugin( 4, 1, "Ping", "127.0.0.1" ) );
 
             bool fd = false;
             testTrigger.TriggerActivatedEvent +=

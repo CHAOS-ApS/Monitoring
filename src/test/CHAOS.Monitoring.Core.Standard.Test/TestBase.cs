@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using CHAOS.Monitoring.Plugin.Ping;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace CHAOS.Monitoring.Core.Standard.Test
 {
     [TestFixture]
     public class TestBase
     {
-        public Ping Ping { get; set; }
-
-        [SetUp]
+        public PluginLoader pluginLoader = new PluginLoader( );
+        public DataSync dataSync = new DataSync();
+        [SetUp] 
         public void SetUp( )
         {
-            Ping = new Ping(1,1,"127.0.0.1");
+            pluginLoader.Add();.;
         }
     }
 }

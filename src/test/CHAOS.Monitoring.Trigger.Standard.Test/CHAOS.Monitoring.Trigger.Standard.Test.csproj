@@ -58,10 +58,6 @@
       <Project>{66565654-CDB3-4F7D-995D-13FC3457899E}</Project>
       <Name>CHAOS.Monitoring.Plugin.Ping</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\app\CHAOS.Monitoring.Plugin.Standard\CHAOS.Monitoring.Plugin.Standard.csproj">
-      <Project>{4D975723-1237-4BC3-BD6C-1D4CE3FECEA4}</Project>
-      <Name>CHAOS.Monitoring.Plugin.Standard</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\app\CHAOS.Monitoring.Plugin\CHAOS.Monitoring.Plugin.csproj">
       <Project>{C57BF330-FDA0-4B18-A285-16E73975153F}</Project>
       <Name>CHAOS.Monitoring.Plugin</Name>

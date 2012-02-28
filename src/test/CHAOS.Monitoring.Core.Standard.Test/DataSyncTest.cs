@@ -18,13 +18,3 @@ namespace CHAOS.Monitoring.Core.Standard.Test
         }
     }
 }
-
-
-
-//no references to plugins, only interfaces
-
-//then work with assemblies to load .dll files from a folder
-
-//this shall be done at the startup of the app
-
-//maybe at runtime too if i get that far :)
