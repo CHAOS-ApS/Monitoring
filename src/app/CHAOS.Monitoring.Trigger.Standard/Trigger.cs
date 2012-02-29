@@ -16,19 +16,8 @@ namespace CHAOS.Monitoring.Trigger.Standard
         private DateTime _startDateTime;
         private List<IPlugin> _plugins = new List<IPlugin>( );
 
-        /// <summary>
-        /// The repetition in milliseconds between each trigger activation. Set to (1-) for no repetition.
-        /// </summary>
         public int Repetition { get; set; }
-
-        /// <summary>
-        /// The start time of the trigger
-        /// </summary>
         public DateTime StartDateTime { get; set; }
-        
-        /// <summary>
-        /// The unique ID that each trigger has for easly paring Triggers with Plugins
-        /// </summary>
         public int Id { get;set; }
 
         /// <summary>

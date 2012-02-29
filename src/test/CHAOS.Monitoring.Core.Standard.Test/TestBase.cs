@@ -6,11 +6,11 @@ namespace CHAOS.Monitoring.Core.Standard.Test
     public class TestBase
     {
         public PluginLoader pluginLoader = new PluginLoader( );
-        public DataSync dataSync = new DataSync();
+        
         [SetUp] 
         public void SetUp( )
         {
-            pluginLoader.Add();.;
+            pluginLoader.Add( 0, "C:\\Users\\Stoffe\\Desktop\\Repo\\\\Monitoring\\PluginLoadTest\\CHAOS.Monitoring.Plugin.Ping.dll" );
         }
     }
 }

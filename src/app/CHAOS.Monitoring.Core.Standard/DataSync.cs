@@ -18,17 +18,23 @@ namespace CHAOS.Monitoring.Core.Standard
             return triggers;
         }
 
-        public static List<Plugin.IPlugin> SyncPluginObjects()
+        public static List<Plugin.IPlugin> SyncPluginObjects(PluginLoader pluginLoader)
         {
             var plugins = new List<Plugin.IPlugin>();
             using (var db = new MonitorLibraryEntities())
             {
                 foreach (var plugin in db.PluginInfo_Get())
                 {
-                    plugins.Add(PluginLoader PluginFactory.CreatePlugin(plugin.PluginID,plugin.TriggerID,plugin.Classpath,Type,plugin.HostAdress));
+                    var tempIPlugin = pluginLoader.GetPlugin(plugin.PluginTypeID, plugin.Classpath, plugin.Classname );
+                    
+                    tempIPlugin.Id = plugin.PluginID;
+                    tempIPlugin.Host = plugin.HostAdress;
+                    tempIPlugin.TriggerId = plugin.TriggerID;
+
+                    plugins.Add(tempIPlugin);
                 }
             }
             return plugins;
-        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
     }
 }

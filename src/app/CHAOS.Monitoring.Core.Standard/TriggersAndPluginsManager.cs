@@ -4,10 +4,10 @@ namespace CHAOS.Monitoring.Core.Standard
 {
     public class TriggersAndPluginsManager
     {
-        public void StartUpSync( )
+        public void SyncAllData( PluginLoader pluginLoader )
         {
-            _triggers = DataSync.SyncTriggerObjects( );
-            _plugins = DataSync.SyncPluginObjects( );
+            DataSync.SyncTriggerObjects(_triggers);
+            DataSync.SyncPluginObjects(_plugins, pluginLoader);
             AddPluginsToTriggers( );
         }
 

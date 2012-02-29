@@ -6,9 +6,9 @@ namespace CHAOS.Monitoring.Core.Standard
 {
     public class PluginLoader
     {
-        private readonly IDictionary<string, Assembly> _LoadedAssemblies = new Dictionary<string, Assembly>( );
+        private readonly IDictionary<int, Assembly> _LoadedAssemblies = new Dictionary<int, Assembly>( );
 
-        private IDictionary<string, Assembly> LoadedAssemblies
+        private IDictionary<int, Assembly> LoadedAssemblies
         {
             get { return _LoadedAssemblies; }
         }
@@ -18,14 +18,14 @@ namespace CHAOS.Monitoring.Core.Standard
             get { return LoadedAssemblies.Count; }
         }
 
-        public void Add( string assemblyIdentifier, string assemblyUrl )
+        public void Add( int assemblyIdentifier, string assemblyUrl )
         {
             LoadedAssemblies.Add( assemblyIdentifier, Assembly.LoadFrom( assemblyUrl ) );
         }
 
-        public IPlugin GetPlugin( string assemblyIdentifier, string classpath )
+        public IPlugin GetPlugin( int assemblyIdentifier, string classpath, string classname )
         {
-            return ( IPlugin )LoadedAssemblies[ assemblyIdentifier ].CreateInstance( classpath );
+            return (IPlugin) LoadedAssemblies[assemblyIdentifier].CreateInstance(classpath + "." + classname);
         }
     }
 }
