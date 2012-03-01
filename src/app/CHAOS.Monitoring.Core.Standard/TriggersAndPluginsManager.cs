@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CHAOS.Monitoring.Core.Standard
 {
     public class TriggersAndPluginsManager
     {
-        public void SyncAllData( PluginLoader pluginLoader )
+        public void SyncAllData( )
         {
-            DataSync.SyncTriggerObjects(_triggers);
-            DataSync.SyncPluginObjects(_plugins, pluginLoader);
+            _triggers = DataSync.SyncTriggerObjects( );
+            _plugins = DataSync.SyncPluginObjects( );
             AddPluginsToTriggers( );
         }
 
@@ -21,10 +22,26 @@ namespace CHAOS.Monitoring.Core.Standard
 
         #region Trigger management
 
-        private List<Trigger.Standard.Trigger> _triggers = new List<Trigger.Standard.Trigger>( );
+        private List<Trigger.Standard.Trigger>  _triggers = new List<Trigger.Standard.Trigger>( );
 
-        public Trigger.Standard.Trigger GetTrigger( int index )
+        /// <summary>
+        /// Returns a trigger that has the specified ID
+        /// </summary>
+        /// <param name="id">The ID</param>
+        /// <returns>The trigger with the ID</returns>
+        public Trigger.Standard.Trigger GetTrigger( int id )
         {
+            int index = -1;
+
+            for ( int i = 0; i < _triggers.Count; i++ )
+            {
+                if ( _triggers[ i ].Id == id )
+                    index = i;
+            }
+
+            if ( index == -1 )
+                throw new ArgumentException( );
+
             return _triggers[ index ];
         }
 
@@ -38,8 +55,25 @@ namespace CHAOS.Monitoring.Core.Standard
         #region Plugin management
         private List<Plugin.IPlugin> _plugins = new List<Plugin.IPlugin>( );
 
-        public Plugin.IPlugin GetPlugin( int index )
+
+        /// <summary>
+        /// Returns a plugin that has the specified ID
+        /// </summary>
+        /// <param name="id">The ID</param>
+        /// <returns>The plugin with the ID</returns>
+        public Plugin.IPlugin GetPlugin( int id )
         {
+            int index = -1;
+
+            for ( int i = 0; i < _plugins.Count; i++ )
+            {
+                if ( _plugins[ i ].Id == id )
+                    index = i;
+            }
+
+            if ( index == -1 )
+                throw new ArgumentException( );
+
             return _plugins[ index ];
         }
 
@@ -47,6 +81,7 @@ namespace CHAOS.Monitoring.Core.Standard
         {
             return _plugins;
         }
+
         #endregion
     }
 }

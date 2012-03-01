@@ -4,6 +4,11 @@ namespace CHAOS.Monitoring.Plugin.Example
 {
     public class Example : IPlugin
     {
+        public Example()
+        {
+
+        }
+
         public Example(int id, int triggerId, String host )
         {
             Id = id;

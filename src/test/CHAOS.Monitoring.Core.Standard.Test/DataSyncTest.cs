@@ -14,7 +14,7 @@ namespace CHAOS.Monitoring.Core.Standard.Test
 
         public void Should_Create_Plugin_Objects_Based_On_Data_From_Database( )
         {
-            Assert.IsNotEmpty( DataSync.SyncPluginObjects(pluginLoader ) );
+            Assert.IsNotEmpty( DataSync.SyncPluginObjects() );
         }
     }
 }
