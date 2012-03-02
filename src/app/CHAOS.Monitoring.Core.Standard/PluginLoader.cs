@@ -30,21 +30,16 @@ namespace CHAOS.Monitoring.Core.Standard
             return LoadedAssemblies.ContainsKey( assemblyIdentifier );
         }
 
-        public static void LoadAssemblies( )
+        public static void LoadAssemblies( string assembliesLocation )
         {
-            const string assembliesLocation = "C:\\Users\\Stoffe\\Desktop\\Repo\\\\Monitoring\\PluginLoadTest\\";
-            //TODO:
-            //Read files in map, for each file add it to the assembly dictionary.
-            //The files name is the identifier so need to cut out the assemblyname from the fullname.
             foreach ( var fullName in  Directory.GetFiles(@assembliesLocation ))
             {
                 int startValueOfAssemblyName = fullName.LastIndexOf("\\") + 1;
                 int lenghtOfAssemblyName = fullName.Length - startValueOfAssemblyName -4;
 
-                string assembly = fullName.Substring( startValueOfAssemblyName, lenghtOfAssemblyName); 
+                string assembly = fullName.Substring( startValueOfAssemblyName, lenghtOfAssemblyName);
                 Add( assembly, fullName );
             }
-            
         }
 
         public static void Add( string assemblyIdentifier, string assemblyUrl )

@@ -5,10 +5,10 @@ namespace CHAOS.Monitoring.Core.Standard
 {
     public class TriggersAndPluginsManager
     {
-        public void SyncAllData( )
+        public void SyncAllData( string assembliesLocation )
         {
             _triggers = DataSync.SyncTriggerObjects( );
-            _plugins = DataSync.SyncPluginObjects( );
+            _plugins = DataSync.SyncPluginObjects( assembliesLocation );
             AddPluginsToTriggers( );
         }
 

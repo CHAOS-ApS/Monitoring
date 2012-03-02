@@ -18,9 +18,9 @@ namespace CHAOS.Monitoring.Core.Standard
             return triggers;
         }
 
-        public static List<Plugin.IPlugin> SyncPluginObjects()
+        public static List<Plugin.IPlugin> SyncPluginObjects( string assembliesLocation )
         {
-            PluginLoader.LoadAssemblies();
+            PluginLoader.LoadAssemblies( assembliesLocation );
            
             var plugins = new List<Plugin.IPlugin>();
             using (var db = new MonitorLibraryEntities())
